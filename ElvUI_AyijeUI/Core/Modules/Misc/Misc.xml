@@ -1,0 +1,5 @@
+<Ui xmlns='http://www.blizzard.com/wow/ui/'>
+	<Script file='Manaframe.lua'/>
+	<Script file='Unitframes_Glowline.lua'/>
+	<Script file='FriendsUpdate.lua'/>
+</Ui>

@@ -1,0 +1,7 @@
+<Ui xmlns='http://www.blizzard.com/wow/ui/'>
+	<Script file='Core.lua'/>
+
+	<Include file='Addons\Addons.xml'/>
+	<Include file='ElvUI\ElvUI.xml'/>
+	<Include file='Blizzard\Blizzard.xml'/>
+</Ui>

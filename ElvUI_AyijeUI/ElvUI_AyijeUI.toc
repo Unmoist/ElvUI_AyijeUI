@@ -1,0 +1,15 @@
+## Title: ElvUI_AyijeUI
+
+## Notes: AyijeUI
+## Dependencies: ElvUI
+
+## DefaultState: enabled
+## Author: Unmoist
+## Version: 04032025
+
+## Interface: 110100
+## X-Required-ElvUI: 13.85
+## IconTexture: Interface\AddOns\ElvUI_AyijeUI\Media\Textures\ajlogo.png
+
+RatioAuras.xml
+Load.xml

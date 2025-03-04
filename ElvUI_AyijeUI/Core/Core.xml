@@ -1,0 +1,6 @@
+<Ui xmlns='http://www.blizzard.com/wow/ui/'>
+	<Include file="Modules\Modules.xml"/>
+	<Script file='Config.lua'/>
+	<Script file='Core.lua'/>
+	<Script file='Tags.lua'/>
+</Ui>

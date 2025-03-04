@@ -1,0 +1,8 @@
+<Ui xmlns='http://www.blizzard.com/wow/ui/'>
+	<Script file='InputMethodEditor.lua'/>
+	<Script file='Menu.lua'/>
+	<Script file='Misc.lua'/>
+	<Script file='Tooltip.lua'/>
+	<Script file='Character.lua'/>
+	<Script file='ObjectiveTracker.lua'/>
+</Ui>

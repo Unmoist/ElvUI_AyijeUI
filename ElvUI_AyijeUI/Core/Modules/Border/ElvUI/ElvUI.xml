@@ -1,0 +1,18 @@
+<Ui xmlns='http://www.blizzard.com/wow/ui/'>
+	<Script file='ActionBars.lua'/>
+	<Script file='AFK.lua'/>
+	<Script file='AltPowerBar.lua'/>
+	<Script file='Auras.lua'/>
+	<Script file='Bags.lua'/>
+	<Script file='ChatVoicePanel.lua'/>
+	<Script file='CopyChatFrame.lua'/>
+	<Script file='LootRoll.lua'/>
+	<Script file='MiniMap.lua'/>
+	<Script file='Option.lua'/>
+	<Script file='RaidUtility.lua'/>
+	<Script file='StaticPopup.lua'/>
+	<Script file='StatusReport.lua'/>
+	<Script file='TotemTracker.lua'/>
+	<Script file='UnitFrames.lua'/>
+	<Script file='DataPanels.lua'/>
+</Ui>
