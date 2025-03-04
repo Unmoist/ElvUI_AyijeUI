@@ -1,0 +1,19 @@
+package-as: ElvUI_AyijeUI
+
+enable-nolib-creation: no
+
+move-folders:
+    ElvUI_AyijeUI/ElvUI_AyijeUI: ElvUI_AyijeUI
+
+manual-changelog:
+  filename: CHANGELOG.md
+  markup-type: markdown
+  
+ignore:
+  - .github
+  - .git
+  - .gitignore
+  - .vscode
+  - CHANGELOG.md
+  - LICENSE
+  - .pkgmeta
