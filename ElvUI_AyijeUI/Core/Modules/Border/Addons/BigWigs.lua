@@ -109,8 +109,10 @@ function S:BigWigs_Plugins()
 	BigWigsAPI:RegisterBarStyle("AyijeUI", {
 		apiVersion = 1,
 		version = 1,
-		barSpacing = 8,
-		barHeight = 20,
+		barSpacing = 6,
+		barHeight = 32,
+        fontSizeNormal = 16,
+		fontSizeEmphasized = 16,
 		fontOutline = "OUTLINE",
 		ApplyStyle = styleBar,
 		BarStopped = removeStyle,
