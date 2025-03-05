@@ -2,4 +2,5 @@
 	<Script file='Manaframe.lua'/>
 	<Script file='Unitframes_Glowline.lua'/>
 	<Script file='FriendsUpdate.lua'/>
+	<Script file='Misc.lua'/>
 </Ui>
