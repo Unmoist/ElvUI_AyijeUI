@@ -4,6 +4,7 @@ local BORDER = E:GetModule('BORDER')
 
 local S = E:GetModule('Skins')
 local UF = E:GetModule("UnitFrames")
+local GetTime = GetTime
 
 local function BorderAndSeparator(f)
     if f then
@@ -207,11 +208,10 @@ function S:ElvUI_UnitFrames_PostUpdateAura(uf, _, button)
         button.IsBorder = true
     end
     
-    if not button.IsColor then
+    if not button.lastColorUpdate or GetTime() - button.lastColorUpdate > 0.1 then
         local r, g, b, a = button.border:GetBackdropBorderColor()
         button.Count:SetTextColor(r, g, b, a)
-
-        button.IsColor = true
+        button.lastColorUpdate = GetTime()
     end
 end
 
