@@ -5,7 +5,7 @@
 
 ## DefaultState: enabled
 ## Author: Unmoist
-## Version: 20250310
+## Version: 20250317
 
 ## Interface: 110100
 ## X-Required-ElvUI: 13.85
