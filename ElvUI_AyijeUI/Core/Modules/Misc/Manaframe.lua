@@ -32,7 +32,7 @@ local function UpdateManaBar()
 			}
 			Manaframe.manaBar:SetStatusBarColor(energycolor.r, energycolor.g, energycolor.b)
 	else
-			powerType = UnitPowerType("player") -- Get the player's current power type		
+			powerType = 0 -- Get the player's current power type		
 		
 			power = UnitPower("player", powerType)
 			maxPower = UnitPowerMax("player", powerType)
