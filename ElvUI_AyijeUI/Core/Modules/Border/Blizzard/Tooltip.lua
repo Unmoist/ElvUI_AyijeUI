@@ -14,7 +14,9 @@ local GameTooltip, GameTooltipStatusBar = GameTooltip, GameTooltipStatusBar
 
 function BORDER:TT_SetStyle(tt)
 	if tt and tt ~= E.ScanTooltip and not tt.IsEmbedded and not tt:IsForbidden() then
-		BORDER:CreateBorder(tt)
+		if not tt.border then
+			BORDER:CreateBorder(tt, nil, -8, 7.5, 8, -8)
+		end
 	end
 end
 
@@ -99,7 +101,7 @@ local function StyleTooltips()
 
 	for _, tt in pairs(styleTT) do
 		if tt and tt ~= E.ScanTooltip and not tt.IsEmbedded and not tt:IsForbidden() then
-			BORDER:CreateBorder(tt)
+				BORDER:TT_SetStyle(tt)
 		end
 	end
 
@@ -119,7 +121,7 @@ function S:TooltipFrames()
 	if not (E.private.skins.blizzard.enable and E.private.skins.blizzard.tooltip) then return end
 
 	StyleTooltips()
-	BORDER:CreateBorder(_G.GameTooltip)
+	--BORDER:CreateBorder(_G.GameTooltip)
 	local ItemTT = _G.GameTooltip.ItemTooltip
 
 	BORDER:HandleIcon(ItemTT.Icon)
