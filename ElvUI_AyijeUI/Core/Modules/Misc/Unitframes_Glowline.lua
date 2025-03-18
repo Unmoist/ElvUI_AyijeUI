@@ -20,7 +20,7 @@ local function UpdateGlowLinePosition(healthBar)
     else
         healthBar.glowLine:Show()
         local xOffset = math.floor(healthBar:GetWidth() * healthPercentage - 5 + 0.5)
-        healthBar.glowLine:SetPoint("LEFT", healthBar, "LEFT", xOffset, 0)    end
+        healthBar.glowLine:SetPoint("LEFT", healthBar, "LEFT", xOffset, 0)
     end
 end
 
