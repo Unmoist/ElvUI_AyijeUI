@@ -153,8 +153,6 @@ function S:ElvUI_UnitFramesGroup (_, group, numGroup)
                 end
                 if BF.border then
                     BF.border:SetFrameLevel(22)
-                    BF.border:SetPoint("TOPLEFT", BF, "TOPLEFT", -9, 9) 
-                    BF.border:SetPoint("BOTTOMRIGHT", BF, "BOTTOMRIGHT", 9, -9) 
                 end
             end
         end
