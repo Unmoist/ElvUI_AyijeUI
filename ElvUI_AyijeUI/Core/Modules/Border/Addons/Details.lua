@@ -93,16 +93,16 @@ local function DetailsResizer()
 
 							local window2 = Details:GetWindow(2)
 							if (window2) then
-									local currentZoneType = Details.zone_type
-									if (currentZoneType == "party" or currentZoneType == "none") then
-											window2:SetSize(288, 66) 
-											DetailsBaseFrame2:ClearAllPoints()
-											DetailsBaseFrame2:SetPoint("BOTTOMRIGHT",-53,243)
-									elseif (currentZoneType == "raid") then
-											window2:SetSize(288, 165) 
-											DetailsBaseFrame2:ClearAllPoints()
-											DetailsBaseFrame2:SetPoint("BOTTOMRIGHT",-53,243)
-									end
+								local currentZoneType = Details.zone_type
+								if (currentZoneType == "party" or currentZoneType == "none") then
+									window2:SetSize(288, 66) 
+									DetailsBaseFrame2:ClearAllPoints()
+									DetailsBaseFrame2:SetPoint("BOTTOMRIGHT",-59,249)
+								elseif (currentZoneType == "raid") then
+									window2:SetSize(288, 165) 
+									DetailsBaseFrame2:ClearAllPoints()
+									DetailsBaseFrame2:SetPoint("BOTTOMRIGHT",-59,249)
+								end
 							end
 					end)
 			end
