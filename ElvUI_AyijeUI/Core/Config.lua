@@ -141,9 +141,9 @@ function AYIJE:Config()
 	ayijeoptions.UnitFrames.args.general.args.desc.args.feature = ACH:Description(L["Adds new features to UnitFrames"], 1, "medium")
 	ayijeoptions.UnitFrames.args.general.args.spacer = ACH:Header(L[""], 2)
 	
-	--ayijeoptions.UnitFrames.args.general.args.glowline = ACH:Group(L["Health Glowline"], nil, 3)
-	--ayijeoptions.UnitFrames.args.general.args.glowline.inline = true
-	--ayijeoptions.UnitFrames.args.general.args.glowline.args.enable = ACH:Toggle(L["Health Glowline"], nil, 1, nil, false, "full", function() return E.db.AYIJE.unitframe.unitFramesGlowline end,function(_, value) E.db.AYIJE.unitframe.unitFramesGlowline = value E:StaticPopup_Show('AYIJE_RL') end)
+	ayijeoptions.UnitFrames.args.general.args.glowline = ACH:Group(L["Health Glowline"], nil, 3)
+	ayijeoptions.UnitFrames.args.general.args.glowline.inline = true
+	ayijeoptions.UnitFrames.args.general.args.glowline.args.enable = ACH:Toggle(L["Health Glowline"], nil, 1, nil, false, "full", function() return E.db.AYIJE.unitframe.unitFramesGlowline end,function(_, value) E.db.AYIJE.unitframe.unitFramesGlowline = value E:StaticPopup_Show('AYIJE_RL') end)
 
 	ayijeoptions.UnitFrames.args.general.args.portraits = ACH:Group(L["Portraits"], nil, 4)
 	ayijeoptions.UnitFrames.args.general.args.portraits.inline = true

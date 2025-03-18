@@ -19,7 +19,8 @@ local function UpdateGlowLinePosition(healthBar)
         healthBar.glowLine:Hide()
     else
         healthBar.glowLine:Show()
-        healthBar.glowLine:SetPoint("LEFT", healthBar, "LEFT", healthBar:GetWidth() * healthPercentage - 5, 0)
+        local xOffset = math.floor(healthBar:GetWidth() * healthPercentage - 5 + 0.5)
+        healthBar.glowLine:SetPoint("LEFT", healthBar, "LEFT", xOffset, 0)    end
     end
 end
 
@@ -27,7 +28,7 @@ local function CreateGlowLine(frame)
     if not frame.glowLine then
         frame.glowLine = frame:CreateTexture(nil, "OVERLAY")
         frame.glowLine:SetTexture(Engine.Glowline);
-        frame.glowLine:SetBlendMode("ADD")
+        frame.glowLine:SetBlendMode("BLEND")
     end
 
     frame:HookScript("OnValueChanged", UpdateGlowLinePosition)
@@ -40,7 +41,7 @@ end
 function UGL:Initialize()
     if not E.db.AYIJE.unitframe.unitFramesGlowline then return end
     
-    --UGL:SecureHook(UF, "UpdateNameSettings", "ElvUI_UnitFrames_Health_GlowLine")
+    UGL:SecureHook(UF, "UpdateNameSettings", "ElvUI_UnitFrames_Health_GlowLine")
 
 end
 
