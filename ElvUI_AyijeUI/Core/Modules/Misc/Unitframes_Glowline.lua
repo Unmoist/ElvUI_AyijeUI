@@ -13,8 +13,7 @@ local function UpdateGlowLinePosition(healthBar)
     local healthPercentage = currentHealth / maxHealth
 
     local height = healthBar:GetHeight()
-    local width = E.db.ProjectHopes.unitframe.unitFramesGlowlineWidth
-    healthBar.glowLine:SetSize(width, height)
+    healthBar.glowLine:SetSize(5, height)
 
     if healthPercentage == 0 or healthPercentage == 1 then
         healthBar.glowLine:Hide()
@@ -41,7 +40,7 @@ end
 function UGL:Initialize()
     if not E.db.AYIJE.unitframe.unitFramesGlowline then return end
     
-    UGL:SecureHook(UF, "UpdateNameSettings", "ElvUI_UnitFrames_Health_GlowLine")
+    --UGL:SecureHook(UF, "UpdateNameSettings", "ElvUI_UnitFrames_Health_GlowLine")
 
 end
 
