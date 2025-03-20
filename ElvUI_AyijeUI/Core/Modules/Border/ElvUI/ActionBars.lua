@@ -110,47 +110,78 @@ function S:ElvUI_ActionBar_LoadKeyBinder()
 end
 
 function S:LAB_MouseUp()
-    self:GetPushedTexture():SetAlpha(0)
-    self:GetHighlightTexture():SetAlpha(0)
-		self:GetCheckedTexture():SetAlpha(0)
+	if not self.border then return end
+	self:GetPushedTexture():SetAlpha(0)
+	self:GetHighlightTexture():SetAlpha(0)
+	self:GetCheckedTexture():SetAlpha(0)
 
-    self.border:SetBackdrop(Engine.Border)
-    self.border:SetBackdropBorderColor(1, 1, 1)
-end
-
-function S:LAB_MouseDown()
-    self:GetCheckedTexture():SetAlpha(0)
-    self:GetPushedTexture():SetAlpha(0)
-    self:GetHighlightTexture():SetAlpha(0)
-
-    self.border:SetBackdrop(Engine.BorderLight)
-    self.border:SetBackdropBorderColor(1, .82, .25)
-end
-
-function S:LAB_MouseUp()
 	self.border:SetBackdrop(Engine.Border)
 	self.border:SetBackdropBorderColor(1, 1, 1)
 end
 
+function S:LAB_MouseDown()
+	if not self.border then return end
+	self:GetCheckedTexture():SetAlpha(0)
+	self:GetPushedTexture():SetAlpha(0)
+	self:GetHighlightTexture():SetAlpha(0)
+
+	self.border:SetBackdrop(Engine.BorderLight)
+	self.border:SetBackdropBorderColor(1, .82, .25)
+end
 
 function S:LAB_EnterMouse()
+	if not self.border then return end
 	self.border:SetBackdrop(Engine.BorderLight)
 	self:GetHighlightTexture():SetAlpha(0)
 	self.border:SetBackdropBorderColor(1, .82, .25)
 end
 
 function S:LAB_LeaveMouse()
+	if not self.border then return end
 	self.border:SetBackdrop(Engine.Border)
 	self.border:SetBackdropBorderColor(1, 1, 1)
 end
 
-function S:LAB_ButtonCreated(button)
-	-- this fixes Key Down getting the pushed texture stuck
-	button:HookScript('OnMouseUp', S.LAB_MouseUp)
-	button:HookScript('OnMouseDown', S.LAB_MouseDown)
-	button:HookScript('OnEnter', S.LAB_EnterMouse)
-	button:HookScript('OnLeave', S.LAB_LeaveMouse)
+function S:OnButtonEvent(event, key, down, spellID)
+	if not self.border then return end
+
+	if event == "UNIT_SPELLCAST_RETICLE_TARGET" then
+			if (self.abilityID == spellID) and not self.TargetReticleAnimFrame:IsShown() then
+					self.border:SetBackdrop(Engine.BorderLight)
+					self.border:SetBackdropBorderColor(1, .82, .25)
+			end
+	elseif event == "UNIT_SPELLCAST_RETICLE_CLEAR" 
+			or event == "UNIT_SPELLCAST_STOP" 
+			or event == "UNIT_SPELLCAST_SUCCEEDED" 
+			or event == "UNIT_SPELLCAST_FAILED" then
+
+			self.border:SetBackdrop(Engine.Border)
+			self.border:SetBackdropBorderColor(1, 1, 1)
+	elseif event == "GLOBAL_MOUSE_UP" then
+			self:UnregisterEvent(event)  -- Prevent infinite event firing
+	end
 end
+
+function S:LAB_ButtonCreated(button)
+	if not button then return end
+
+	button:RegisterUnitEvent('UNIT_SPELLCAST_STOP', 'player')
+	button:RegisterUnitEvent('UNIT_SPELLCAST_SUCCEEDED', 'player')
+	button:RegisterUnitEvent('UNIT_SPELLCAST_FAILED', 'player')
+	button:RegisterUnitEvent('UNIT_SPELLCAST_RETICLE_TARGET', 'player')
+	button:RegisterUnitEvent('UNIT_SPELLCAST_RETICLE_CLEAR', 'player')
+
+	-- Prevent duplicate hooks
+	if not button.ayijeui_hooks_applied then
+			button:HookScript('OnMouseUp', S.LAB_MouseUp)
+			button:HookScript('OnMouseDown', S.LAB_MouseDown)
+			button:HookScript('OnEnter', S.LAB_EnterMouse)
+			button:HookScript('OnLeave', S.LAB_LeaveMouse)
+			button:SetScript("OnEvent", S.OnButtonEvent)
+			button.ayijeui_hooks_applied = true
+	end
+end
+
 
 function S:ElvUI_ActionBars()
 	if not (E.db.AYIJE.skins.actionBarsButton or E.db.AYIJE.skins.actionBarsBackdrop) then
@@ -211,8 +242,7 @@ function S:ElvUI_ActionBars()
 			"SetupFlyoutButton",
 			function(_, button)
 				BORDER:CreateBorder(button)
-			end
-		)
+			end)
 	end
 
     -- Keybind
