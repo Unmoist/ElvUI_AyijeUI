@@ -13,7 +13,6 @@ local NUM_ACTIONBAR_BUTTONS = NUM_ACTIONBAR_BUTTONS
 
 local LAB = E.Libs.LAB
 
-
 function S:ElvUI_ActionBar_SkinButton(button, useBackdrop)
 	if button.border then
 		if useBackdrop then
