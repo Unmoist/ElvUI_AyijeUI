@@ -53,8 +53,10 @@ function S:ElvUI_DataPanels()
 		end
 	end
 	
-	if _G.ElvUI_DTPanel0.border then
-		_G.ElvUI_DTPanel0.border:Hide()
+	if _G.ElvUI_DTPanel0 then 
+		if _G.ElvUI_DTPanel0.border then
+			_G.ElvUI_DTPanel0.border:Hide()
+		end
 	end
 
 	S:SecureHook(DT, "BuildPanelFrame", "ElvUI_SkinDataPanel")
