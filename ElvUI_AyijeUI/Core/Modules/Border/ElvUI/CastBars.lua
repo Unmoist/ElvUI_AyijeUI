@@ -48,20 +48,17 @@ function S:ElvUI_UnitFrames_SkinCastBar(_, frame)
 	end
 ]]
 
-
-
 	frame.Castbar:HookScript("OnValueChanged", function(self)
-		if not self.notInterruptible and self.unit and self.unit ~= "player" then
+		if self.channeling then
+			self:SetStatusBarTexture("Interface\\AddOns\\ElvUI_AyijeUI\\Media\\Statusbar\\blizzcastchannel.tga")
+			self:SetStatusBarColor(1, 1, 1, 1)
+			self.bg:SetVertexColor(1, 1, 1)  -- Set the color to white (R, G, B)
+		elseif not self.notInterruptible and self.unit and self.unit ~= "player" then
 			self:SetStatusBarTexture("Interface\\AddOns\\ElvUI_AyijeUI\\Media\\Statusbar\\blizzcast.tga")
 			self:SetStatusBarColor(1, 1, 1, 1)
 			self.bg:SetVertexColor(1, 1, 1)  -- Set the color to white (R, G, B)
-
 		elseif self.notInterruptible then
 			self:SetStatusBarTexture("Interface\\AddOns\\ElvUI_AyijeUI\\Media\\Statusbar\\blizzcastnonbreakable.tga")
-			self:SetStatusBarColor(1, 1, 1, 1)
-			self.bg:SetVertexColor(1, 1, 1)  -- Set the color to white (R, G, B)
-		elseif self.channeling then
-			self:SetStatusBarTexture("Interface\\AddOns\\ElvUI_AyijeUI\\Media\\Statusbar\\blizzcastchannel.tga")
 			self:SetStatusBarColor(1, 1, 1, 1)
 			self.bg:SetVertexColor(1, 1, 1)  -- Set the color to white (R, G, B)
 		else
