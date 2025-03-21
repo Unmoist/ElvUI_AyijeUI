@@ -4,6 +4,7 @@
 	<Script file='AltPowerBar.lua'/>
 	<Script file='Auras.lua'/>
 	<Script file='Bags.lua'/>
+	<Script file='CastBars.lua'/>
 	<Script file='ChatVoicePanel.lua'/>
 	<Script file='CopyChatFrame.lua'/>
 	<Script file='LootRoll.lua'/>
