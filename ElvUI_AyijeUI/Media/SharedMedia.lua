@@ -21,6 +21,7 @@ LSM:Register("statusbar", "focus", [[Interface\Addons\ElvUI_AyijeUI\Media\Status
 LSM:Register("statusbar", "halfbar", [[Interface\Addons\ElvUI_AyijeUI\Media\Statusbar\halfbar.tga]]) 
 LSM:Register("statusbar", "Rumil", [[Interface\Addons\ElvUI_AyijeUI\Media\Statusbar\Rumil.tga]]) 
 LSM:Register("statusbar", "ShieldAbsorbGlowline", [[Interface\Addons\ElvUI_AyijeUI\Media\Statusbar\ShieldAbsorbGlowline.tga]]) 
+LSM:Register("statusbar", "Empty", [[Interface\Addons\ElvUI_AyijeUI\Media\Statusbar\Empty.tga]]) 
 
 -- Borders
 LSM:Register("border", "Ayije_Thin", [[Interface\Addons\ElvUI_AyijeUI\Media\Borders\Ayije_Thin.tga]]) 
