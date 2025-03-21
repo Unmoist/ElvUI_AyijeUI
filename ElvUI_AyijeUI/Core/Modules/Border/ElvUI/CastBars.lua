@@ -60,7 +60,10 @@ function S:ElvUI_UnitFrames_SkinCastBar(_, frame)
 			self:SetStatusBarTexture("Interface\\AddOns\\ElvUI_AyijeUI\\Media\\Statusbar\\blizzcastnonbreakable.tga")
 			self:SetStatusBarColor(1, 1, 1, 1)
 			self.bg:SetVertexColor(1, 1, 1)  -- Set the color to white (R, G, B)
-
+		elseif self.channeling then
+			self:SetStatusBarTexture("Interface\\AddOns\\ElvUI_AyijeUI\\Media\\Statusbar\\blizzcastchannel.tga")
+			self:SetStatusBarColor(1, 1, 1, 1)
+			self.bg:SetVertexColor(1, 1, 1)  -- Set the color to white (R, G, B)
 		else
 			-- Default texture for player casts or fallback
 			self:SetStatusBarTexture("Interface\\AddOns\\ElvUI_AyijeUI\\Media\\Statusbar\\blizzcast.tga")
