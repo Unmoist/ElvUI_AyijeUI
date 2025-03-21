@@ -13,6 +13,7 @@ local NUM_ACTIONBAR_BUTTONS = NUM_ACTIONBAR_BUTTONS
 
 local LAB = E.Libs.LAB
 
+
 function S:ElvUI_ActionBar_SkinButton(button, useBackdrop)
 	if button.border then
 		if useBackdrop then
@@ -148,14 +149,21 @@ function S:OnButtonEvent(event, key, down, spellID)
 			if (self.abilityID == spellID) and not self.TargetReticleAnimFrame:IsShown() then
 					self.border:SetBackdrop(Engine.BorderLight)
 					self.border:SetBackdropBorderColor(1, .82, .25)
+					self.TargetReticleAnimFrame:Show()
+					self.TargetReticleAnimFrame:SetAlpha(0)
+
 			end
 	elseif event == "UNIT_SPELLCAST_RETICLE_CLEAR" 
 			or event == "UNIT_SPELLCAST_STOP" 
 			or event == "UNIT_SPELLCAST_SUCCEEDED" 
 			or event == "UNIT_SPELLCAST_FAILED" then
+				if self.TargetReticleAnimFrame:IsShown() then
+					self.TargetReticleAnimFrame:Hide()
 
-			self.border:SetBackdrop(Engine.Border)
-			self.border:SetBackdropBorderColor(1, 1, 1)
+					self.border:SetBackdrop(Engine.Border)
+					self.border:SetBackdropBorderColor(1, 1, 1)
+				end
+
 	elseif event == "GLOBAL_MOUSE_UP" then
 			self:UnregisterEvent(event)  -- Prevent infinite event firing
 	end
