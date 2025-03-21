@@ -96,6 +96,12 @@ local function HandleTimers(tracker, key)
 	end
 end
 
+function S:ReskinOjectiveTrackerHeader(header)
+	if not header or not header.Text then return end
+
+	header.Text:SetFont(E.media.normFont, 16, E.db.general.fontStyle)
+end
+
 function S:Blizzard_ObjectiveTracker()
 	if not (E.private.skins.blizzard.enable and E.private.skins.blizzard.objectiveTracker) then return end
 
@@ -126,6 +132,13 @@ function S:Blizzard_ObjectiveTracker()
 			end
 		end
     end)
+
+	local MainHeader = _G.ObjectiveTrackerFrame.Header
+	S:ReskinOjectiveTrackerHeader(MainHeader)
+
+	for _, tracker in pairs(trackers) do
+		S:ReskinOjectiveTrackerHeader(tracker.Header)
+	end
 end
 
 S:AddCallbackForAddon('Blizzard_ObjectiveTracker')
