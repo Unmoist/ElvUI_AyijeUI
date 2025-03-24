@@ -234,11 +234,6 @@ function S:ElvUI_UnitFrames_Construct_AuraBars(_, f)
 	end
 end
 
-function S:ElvUI_UnitFrames_Construct_AuraIcon(_, button)
-
-
-end
-
 function S:UnitFrames()
     -- Player, Target, Target of Target, Focus, Focus Target, Pet, Pet Target, Target of Target of Target. 
 	S:SecureHook(UF, "CreateAndUpdateUF", "ElvUI_UnitFrames")
@@ -251,7 +246,6 @@ function S:UnitFrames()
 
     --Aura's on Unitframes. 
     S:SecureHook(UF, "PostUpdateAura", "ElvUI_UnitFrames_PostUpdateAura")
-    S:SecureHook(UF, "Construct_AuraIcon", "ElvUI_UnitFrames_Construct_AuraIcon")
 
     -- Status bar
 	S:SecureHook(UF, "Configure_AuraBars", "ElvUI_UnitFrames_Configure_AuraBars")

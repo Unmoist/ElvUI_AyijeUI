@@ -528,6 +528,8 @@
 	<Button name='ElvUIAuraTemplate5858' inherits='ElvUIAuraTemplate' virtual='true'><Size x='58' y='58'/></Button>
 	<Button name='ElvUIAuraTemplate5860' inherits='ElvUIAuraTemplate' virtual='true'><Size x='58' y='60'/></Button>
 
+	<Button name='ElvUIAuraTemplate5959' inherits='ElvUIAuraTemplate' virtual='true'><Size x='59' y='59'/></Button>
+
 	<Button name='ElvUIAuraTemplate6016' inherits='ElvUIAuraTemplate' virtual='true'><Size x='60' y='16'/></Button>
 	<Button name='ElvUIAuraTemplate6018' inherits='ElvUIAuraTemplate' virtual='true'><Size x='60' y='18'/></Button>
 	<Button name='ElvUIAuraTemplate6020' inherits='ElvUIAuraTemplate' virtual='true'><Size x='60' y='20'/></Button>
