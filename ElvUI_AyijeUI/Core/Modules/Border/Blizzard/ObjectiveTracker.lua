@@ -99,7 +99,7 @@ end
 function S:ReskinOjectiveTrackerHeader(header)
 	if not header or not header.Text then return end
 
-	header.Text:SetFont(E.db.general.fonts.objective.font, E.db.general.fonts.objective.size, E.db.general.fonts.objective.outline)
+	header.Text:SetFont(Engine.Font, E.db.general.fonts.objective.size, E.db.general.fonts.objective.outline)
 end
 
 function S:Blizzard_ObjectiveTracker()
