@@ -1,12 +1,10 @@
 local AddonName, Engine = ...
 local E, L, V, P, G = unpack(ElvUI)
 local BORDER = E:GetModule('BORDER')
-
 local S = E:GetModule('Skins')
 
 local _G = _G
 local hooksecurefunc = hooksecurefunc
-
 local CreateFrame = CreateFrame
 
 function S:OmniCD_ConfigGUI()
@@ -22,34 +20,51 @@ function S:OmniCD_ConfigGUI()
 end
 
 function S:OmniCD_Party_Icon()
-	hooksecurefunc(_G.OmniCD[1].Party, "AcquireIcon", function(_, barFrame, iconIndex, unitBar)
-		local icon = barFrame.icons[iconIndex]
+	local OmniCD = _G.OmniCD and _G.OmniCD[1]
+	if not OmniCD then return end
 
-		for i = 1, 8 do
-			if barFrame:GetName() == ("OmniCDraidBar" .. i) then
-				if icon and not icon.Border then
-					BORDER:CreateBorder(icon, nil, -7.5, 7.5, 7.5, -7.5)
-					icon.Border = true
-				end
-				break  -- Exit the loop early once a match is found
-			end
+	hooksecurefunc(OmniCD.Party.BarFrameIconMixin, "SetBorder", function(icon)
+		if not icon or not icon.GetObjectType then return end
+
+		if icon:GetObjectType() == "Texture" then
+				icon = icon:GetParent()
 		end
-	
-		for k = 1, 5 do
-			if barFrame:GetName() == ("OmniCDBar" .. k) then
-				if icon and not icon.Border then
+
+		if icon.border then
+				icon.border:Kill()
+		end
+
+		local border = CreateFrame("Frame", nil, icon, BackdropTemplateMixin and "BackdropTemplate")
+		if not border then return end
+
+		local width = icon:GetWidth() + 16
+		local height = icon:GetHeight() + 16
+		local x, y = icon:GetCenter()
+
+		border:SetFrameStrata(icon:GetFrameStrata())
+		border:SetFrameLevel(icon:GetFrameLevel() + 3)
+		border:SetBackdrop(Engine.Border)
+		border:SetSize(width, height)
+
+		if x and y then
+				border:ClearAllPoints()
+				border:SetPoint("CENTER", UIParent, "BOTTOMLEFT", math.floor(x), math.floor(y + 0.7))
+		end
+
+		icon.border = border
+	end)
+
+	hooksecurefunc(OmniCD.Party.BarFrameIconMixin, "SetExIconName", function(icon)
+			if icon and not icon.Border then
 					BORDER:CreateBorder(icon)
 					icon.Border = true
-				end
-				break  -- Exit the loop early once a match is found
 			end
-		end
 	end)
 end
 
-
 function S:OmniCD()
 	if not E.db.AYIJE.skins.omnicd then return end
+
 	S:OmniCD_ConfigGUI()
 	S:OmniCD_Party_Icon()
 end
