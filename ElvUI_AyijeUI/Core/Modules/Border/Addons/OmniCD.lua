@@ -37,7 +37,7 @@ function S:OmniCD_Party_Icons()
 		local border = CreateFrame("Frame", nil, icon, BackdropTemplateMixin and "BackdropTemplate")
 		if not border then return end
 	
-		border:SetBackdrop(Private.Border)
+		border:SetBackdrop(Engine.Border)
 		border:SetFrameLevel(icon:GetFrameLevel() + 2)
 		border:SetPoint("TOPLEFT" , icon, "TOPLEFT", -7.8, 7.8)
 		border:SetPoint("BOTTOMRIGHT", icon, "BOTTOMRIGHT", 7.8, -7.8)
@@ -59,7 +59,7 @@ function S:OmniCD_Party_Icons()
 		local border = CreateFrame("Frame", nil, icon, BackdropTemplateMixin and "BackdropTemplate")
 		if not border then return end
 
-		border:SetBackdrop(Private.Border)
+		border:SetBackdrop(Engine.Border)
 		border:SetFrameLevel(icon:GetFrameLevel() + 2)
 		border:SetPoint("TOPLEFT" , icon, "TOPLEFT", -8, 8)
 		border:SetPoint("BOTTOMRIGHT", icon, "BOTTOMRIGHT", 8, -8)
