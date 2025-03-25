@@ -8,6 +8,38 @@ local _G = _G
 local pairs = pairs
 
 local function GetUnitFrame()
+	for i = 1, 2 do
+		for k = 2, 5 do
+			local unitName = "Grid2LayoutHeader" .. i .. "UnitButton" .. k
+			local unitButton = _G[unitName]
+			if unitButton then 
+				if not IsInRaid() then
+					BORDER:CreateSeparator(unitButton)
+					unitButton.separator:Show()
+					unitButton.separator:SetPoint("TOPRIGHT", unitButton, 0, 3)
+				elseif IsInRaid() and unitButton.separator then
+					unitButton.separator:Hide()
+				end
+			end
+		end
+	end
+end
+
+function S:Grid2()
+  if not E.db.AYIJE.skins.grid2 then return end
+	local Grid2Layout = Grid2:GetModule("Grid2Layout")
+	local Grid2 = Grid2
+
+  BORDER:CreateBorder(_G.Grid2LayoutFrame)
+
+	hooksecurefunc(Grid2Layout, "LoadLayout", GetUnitFrame)
+end
+
+S:AddCallbackForAddon("Grid2")
+
+-- Old code for safe keeping. 
+--[[
+local function GetUnitFrame()
 	if IsInRaid() then return end
 
 	local partyFrames = {
@@ -63,3 +95,4 @@ function S:Grid2()
 end
 
 S:AddCallbackForAddon("Grid2")
+]]
