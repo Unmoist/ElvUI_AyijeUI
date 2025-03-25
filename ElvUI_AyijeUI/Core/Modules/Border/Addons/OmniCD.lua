@@ -72,7 +72,7 @@ function S:OmniCD()
 	if not E.db.AYIJE.skins.omnicd then return end
 
 	S:OmniCD_ConfigGUI()
-	S:OmniCD_Party_Icon()
+	S:OmniCD_Party_Icons()
 end
 
 S:AddCallbackForAddon("OmniCD")
