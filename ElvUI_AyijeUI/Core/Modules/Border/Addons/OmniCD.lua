@@ -39,8 +39,8 @@ function S:OmniCD_Party_Icons()
 	
 		border:SetBackdrop(Engine.Border)
 		border:SetFrameLevel(icon:GetFrameLevel() + 2)
-		border:SetPoint("TOPLEFT" , icon, "TOPLEFT", -7.8, 7.8)
-		border:SetPoint("BOTTOMRIGHT", icon, "BOTTOMRIGHT", 7.8, -7.8)
+		border:SetPoint("TOPLEFT" , icon, "TOPLEFT", -8.1, 8.1)
+		border:SetPoint("BOTTOMRIGHT", icon, "BOTTOMRIGHT", 7.5, -7.5)
 		
 		icon.border = border
 	end)
