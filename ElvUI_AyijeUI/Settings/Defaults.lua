@@ -31,6 +31,7 @@ P.AYIJE = {
 
 	-- UnitFrame Generals
 	unitframe = {
+		overshield = false,
 		unitFramesGlowline = false,
 		framelevelPortraits = 20,
 		classPortraits = false, 

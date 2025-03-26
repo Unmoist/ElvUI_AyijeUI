@@ -141,6 +141,10 @@ function AYIJE:Config()
 	ayijeoptions.UnitFrames.args.general.args.desc.args.feature = ACH:Description(L["Adds new features to UnitFrames"], 1, "medium")
 	ayijeoptions.UnitFrames.args.general.args.spacer = ACH:Header(L[""], 2)
 	
+	ayijeoptions.UnitFrames.args.general.args.overshield = ACH:Group(L["Overshield"], nil, 3)
+	ayijeoptions.UnitFrames.args.general.args.overshield.inline = true
+	ayijeoptions.UnitFrames.args.general.args.overshield.args.enable = ACH:Toggle(L["Overshield"], nil, 1, nil, false, "full", function() return E.db.AYIJE.unitframe.overshield end,function(_, value) E.db.AYIJE.unitframe.overshield = value E:StaticPopup_Show('AYIJE_RL') end)
+
 	ayijeoptions.UnitFrames.args.general.args.glowline = ACH:Group(L["Health Glowline"], nil, 3)
 	ayijeoptions.UnitFrames.args.general.args.glowline.inline = true
 	ayijeoptions.UnitFrames.args.general.args.glowline.args.enable = ACH:Toggle(L["Health Glowline"], nil, 1, nil, false, "full", function() return E.db.AYIJE.unitframe.unitFramesGlowline end,function(_, value) E.db.AYIJE.unitframe.unitFramesGlowline = value E:StaticPopup_Show('AYIJE_RL') end)

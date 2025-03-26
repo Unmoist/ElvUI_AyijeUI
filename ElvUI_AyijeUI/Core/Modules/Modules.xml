@@ -4,4 +4,5 @@
 	<Include file="Portraits\Portraits.xml"/>
 	<Include file="HealthBackdrop\HealthBackdrop.xml"/>
 	<Include file="Misc\Misc.xml"/>
+	<Include file="Overshield\Overshield.xml"/>
 </Ui>
