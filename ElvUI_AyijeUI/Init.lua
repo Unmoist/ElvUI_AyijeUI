@@ -30,6 +30,9 @@ Engine.Ayije_light = "Interface\\AddOns\\ElvUI_AyijeUI\\Media\\Statusbar\\Ayije_
 Engine.Glowline = "Interface\\AddOns\\ElvUI_AyijeUI\\Media\\Textures\\Glowline.tga"
 Engine.BackgroundTexture = {bgFile = "Interface\\AddOns\\ElvUI_AyijeUI\\Media\\Textures\\Square_White.tga", edgeFile = nil, tileSize = 0, edgeSize = 0, insets = {left = 0, right = 0, top = 0, bottom = 0}}
 Engine.Separator = {bgFile = "Interface\\AddOns\\ElvUI_AyijeUI\\Media\\Textures\\Separator.tga", edgeFile = nil, tileSize = 0, edgeSize = 0, insets = {left = 0, right = 0, top = 0, bottom = 0}}
+Engine.AbsorbOverlay = "Interface\\AddOns\\ElvUI_AyijeUI\\Media\\Textures\\Shield-Overlay.blp"
+Engine.AbsorbGlow = "Interface\\AddOns\\ElvUI_AyijeUI\\Media\\Textures\\Shield-Overshield.blp"
+Engine.AbsorbTexture = "Interface\\AddOns\\ElvUI_AyijeUI\\Media\\Textures\\Shield-Fill.tga"
 
 ----------------------------------------------------------------------
 ------------------------------- Events -------------------------------

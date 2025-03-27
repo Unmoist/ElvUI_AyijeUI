@@ -37,7 +37,6 @@ local function createAbsorbOverlayFrame(self, frame)
 
     local parentFrame = frame.Health;
     if not parentFrame then
-        print("Error: Parent frame (Health) is nil.")
         return
     end
 
@@ -67,7 +66,7 @@ function OS:SetTexture_HealComm(module, obj, texture)
 end
 
 function OS:Initialize()
-	if not E.db.AYIJE.overshield.Absorb then return end
+	if not E.db.AYIJE.unitframe.overshield then return end
 
 	UF:SecureHook(UF,"Construct_HealComm", createAbsorbOverlayFrame);
 	UF:SecureHook(UF,"UpdateHealComm", updateAbsorbOverlayFrame);
