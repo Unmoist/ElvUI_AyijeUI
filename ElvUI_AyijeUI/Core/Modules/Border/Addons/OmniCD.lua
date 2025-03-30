@@ -7,6 +7,9 @@ local _G = _G
 local hooksecurefunc = hooksecurefunc
 local CreateFrame = CreateFrame
 
+local SetExIconName = {}
+local SetBorder = {}
+
 function S:OmniCD_ConfigGUI()
 	local O = _G.OmniCD[1]
 
@@ -25,7 +28,8 @@ function S:OmniCD_Party_Icons()
 
 	hooksecurefunc(OmniCD.Party.BarFrameIconMixin, "SetExIconName", function(icon)
 		if not icon or not icon.GetObjectType then return end
-	
+    if SetExIconName[icon] then return end -- Prevent reprocessing
+
 		if icon:GetObjectType() == "Texture" then
 				icon = icon:GetParent()
 		end
@@ -47,6 +51,7 @@ function S:OmniCD_Party_Icons()
 
 	hooksecurefunc(OmniCD.Party.BarFrameIconMixin, "SetBorder", function(icon)
 		if not icon or not icon.GetObjectType then return end
+    if SetBorder[icon] then return end -- Prevent reprocessing
 
 		if icon:GetObjectType() == "Texture" then
 				icon = icon:GetParent()
