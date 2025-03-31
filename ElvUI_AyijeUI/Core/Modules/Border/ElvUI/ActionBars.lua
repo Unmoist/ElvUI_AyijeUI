@@ -15,16 +15,21 @@ local LAB = E.Libs.LAB
 
 
 function S:ElvUI_ActionBar_SkinButton(button, useBackdrop)
+	if not button then return end
 	if button.border then
-		if useBackdrop then
-			button.border:Hide()
-		else
-			button.border:Show()
-		end
-	else
-		BORDER:CreateBorder(button, 2)
+			if useBackdrop then
+					if button.border:IsShown() then
+							button.border:Hide()
+					end
+			else
+					if not button.border:IsShown() then
+							button.border:Show()
+					end
+			end
+			return
 	end
 
+	BORDER:CreateBorder(button, 2)
 	button.BorderShadow:Kill()
 	button:GetPushedTexture():SetAlpha(0)
 	button:GetHighlightTexture():SetAlpha(0)
@@ -145,27 +150,32 @@ end
 function S:OnButtonEvent(event, key, down, spellID)
 	if not self.border then return end
 
+	local border = self.border
+	local isLight = border:GetBackdrop() == Engine.BorderLight
+	local currentColor = {border:GetBackdropBorderColor()}
+
 	if event == "UNIT_SPELLCAST_RETICLE_TARGET" then
 			if (self.abilityID == spellID) and not self.TargetReticleAnimFrame:IsShown() then
-					self.border:SetBackdrop(Engine.BorderLight)
-					self.border:SetBackdropBorderColor(1, .82, .25)
+					if not isLight then
+							border:SetBackdrop(Engine.BorderLight)
+							border:SetBackdropBorderColor(1, .82, .25)
+					end
 					self.TargetReticleAnimFrame:Show()
 					self.TargetReticleAnimFrame:SetAlpha(0)
-
 			end
 	elseif event == "UNIT_SPELLCAST_RETICLE_CLEAR" 
 			or event == "UNIT_SPELLCAST_STOP" 
 			or event == "UNIT_SPELLCAST_SUCCEEDED" 
 			or event == "UNIT_SPELLCAST_FAILED" then
-				if self.TargetReticleAnimFrame:IsShown() then
+			if self.TargetReticleAnimFrame:IsShown() then
 					self.TargetReticleAnimFrame:Hide()
-
-					self.border:SetBackdrop(Engine.Border)
-					self.border:SetBackdropBorderColor(1, 1, 1)
-				end
-
+					if isLight then
+							border:SetBackdrop(Engine.Border)
+							border:SetBackdropBorderColor(1, 1, 1)
+					end
+			end
 	elseif event == "GLOBAL_MOUSE_UP" then
-			self:UnregisterEvent(event)  -- Prevent infinite event firing
+			self:UnregisterEvent(event)
 	end
 end
 

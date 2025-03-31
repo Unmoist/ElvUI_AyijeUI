@@ -18,7 +18,10 @@ local ITEM_QUALITY_COLORS = ITEM_QUALITY_COLORS
 
 -- Functions
 function BORDER:CreateBorder(frame, frameLevel, SetPoint1, SetPoint2, SetPoint3, SetPoint4, backdrop, event, Point1, Point2)
-    if not frame or frame.border then return end
+    -- Early exit checks
+    if not frame then return end
+    if frame.border then return end -- Already has a border
+    if frame.IsBorder then return end -- Already processed
 
     if frame:GetObjectType() == "Texture" then
         frame = frame:GetParent()
@@ -69,6 +72,8 @@ function BORDER:CreateBorder(frame, frameLevel, SetPoint1, SetPoint2, SetPoint3,
             end)
         end
     end
+    
+    frame.IsBorder = true -- Mark as processed
 end
 
 do
