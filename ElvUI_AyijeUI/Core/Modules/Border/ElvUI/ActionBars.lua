@@ -169,7 +169,7 @@ function S:OnButtonEvent(event, key, down, spellID)
 			or event == "UNIT_SPELLCAST_FAILED" then
 			if self.TargetReticleAnimFrame:IsShown() then
 					self.TargetReticleAnimFrame:Hide()
-					if isLight then
+					if not isLight then
 							border:SetBackdrop(Engine.Border)
 							border:SetBackdropBorderColor(1, 1, 1)
 					end
