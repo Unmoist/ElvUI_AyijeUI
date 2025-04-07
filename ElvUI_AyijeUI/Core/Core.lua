@@ -95,10 +95,6 @@ function AYIJE:Notification(string, AcceptFunction, DeclineFunction)
 end
 
 function AYIJE:LoadProfile()
-	if not E.data.profiles['AyijeUI'] then
-		return Engine:Print("AyijeUI Profile don't exist, please import it from WAGO.")
-  end
-
 		E.private.AYIJE.profileSet = Engine.Version
 
     E.data:SetProfile('AyijeUI')
