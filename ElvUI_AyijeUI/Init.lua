@@ -95,9 +95,3 @@ local function CallbackInitialize()
 end
 
 E:RegisterModule(AddonName, CallbackInitialize)
-
-local function CallbackInitialize()
-	Initialize()
-end
-
-E:RegisterModule(AddonName, CallbackInitialize)
