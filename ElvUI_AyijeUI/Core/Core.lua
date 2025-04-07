@@ -81,3 +81,26 @@ E.PopupDialogs.AYIJE_VC = {
 	hideOnEscape = false,
 }
 
+function AYIJE:Notification(string, AcceptFunction, DeclineFunction)
+	local Frame = "Notification"
+
+	StaticPopupDialogs[Frame] = {
+		text = string,
+		button1 = "Yes",
+		button2 = "No",
+		OnAccept = AcceptFunction,
+		OnCancel = DeclineFunction,
+	}
+	StaticPopup_Show(Frame)
+end
+
+function AYIJE:LoadProfile()
+	if not E.data.profiles['AyijeUI'] then
+		return Engine:Print("AyijeUI Profile don't exist, please import it from WAGO.")
+  end
+
+		E.private.AYIJE.profileSet = Engine.Version
+
+    E.data:SetProfile('AyijeUI')
+    Engine:Print('|cff66FF66'..L["Applied ElvUI profile: "] .. 'AyijeUI')
+end
