@@ -73,30 +73,3 @@ E.PopupDialogs.AYIJE_EDITBOX = {
 	preferredIndex = 3,
 	hideOnEscape = 1,
 }
-
--- Version check popup
-E.PopupDialogs.AYIJE_VC = {
-	text = format('|cffC80000%s|r', L["Your ElvUI is outdated - please update and reload."]),
-	whileDead = 1,
-	hideOnEscape = false,
-}
-
-function AYIJE:Notification(string, AcceptFunction, DeclineFunction)
-	local Frame = "Notification"
-
-	StaticPopupDialogs[Frame] = {
-		text = string,
-		button1 = "Yes",
-		button2 = "No",
-		OnAccept = AcceptFunction,
-		OnCancel = DeclineFunction,
-	}
-	StaticPopup_Show(Frame)
-end
-
-function AYIJE:LoadProfile()
-		E.private.AYIJE.profileSet = Engine.Version
-
-    E.data:SetProfile('AyijeUI')
-    Engine:Print('|cff66FF66'..L["Applied ElvUI profile: "] .. 'AyijeUI')
-end

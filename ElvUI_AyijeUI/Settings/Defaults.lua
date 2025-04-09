@@ -16,7 +16,6 @@ G.AYIJE = {
 
 -- Defaults: E.private.AYIJE
 V.AYIJE = {
-	profileSet = nil,
 }
 
 -- Defaults: E.db.AYIJE

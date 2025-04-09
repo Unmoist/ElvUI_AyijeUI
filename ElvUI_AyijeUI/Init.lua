@@ -40,14 +40,6 @@ Engine.AbsorbTexture = "Interface\\AddOns\\ElvUI_AyijeUI\\Media\\Textures\\Shiel
 
 local function Initialize()
     EP:RegisterPlugin(AddonName, AYIJE.Config)
-
-    if E.data.profiles['AyijeUI'] then
-        if E.private.AYIJE.profileSet == nil then
-            AYIJE:Notification("Do you wish to load AyijeUI ElvUI profile onto this character?", function() AYIJE:LoadProfile() end, function() E.private.AYIJE.profileSet = Engine.Version end)
-        end
-    else
-        Engine:Print("AyijeUI Profile don't exist, please import it from WAGO.")
-    end
 end
 
 local function CallbackInitialize()
