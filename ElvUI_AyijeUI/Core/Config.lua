@@ -220,24 +220,6 @@ function AYIJE:Config()
 	ayijeoptions.UnitFrames.args.targetoftargetoftargetborder.args.spacer = ACH:Header(L[""], 2)
 	ayijeoptions.UnitFrames.args.targetoftargetoftargetborder.args.enable = ACH:Toggle(L["Enable"], nil, 3, nil, false, "full",function() return E.db.AYIJE.border.TargetofTargetofTarget end,function(_, value) E.db.AYIJE.border.TargetofTargetofTarget = value E:StaticPopup_Show('AYIJE_RL') end, function() return not E.db.unitframe.units.targettargettarget.enable end)
 	
-	ayijeoptions.UnitFrames.args.partyborder = ACH:Group(L["Party"], nil, 60, nil, nil, nil, function() return not E.db.unitframe.units.party.enable end, nil, nil)
-	ayijeoptions.UnitFrames.args.partyborder.args.desc = ACH:Group(L["Description"], nil, 1)
-	ayijeoptions.UnitFrames.args.partyborder.args.desc.inline = true
-	ayijeoptions.UnitFrames.args.partyborder.args.desc.args.feature = ACH:Description(L["Adds a border to the Party Unitframe."], 1, "medium")
-	ayijeoptions.UnitFrames.args.partyborder.args.spacer = ACH:Header(L[""], 2)
-	ayijeoptions.UnitFrames.args.partyborder.args.party = ACH:Toggle(L["Enable"], nil, 3, nil, false, "full",function() return E.db.AYIJE.border.Party end,function(_, value) E.db.AYIJE.border.Party = value E:StaticPopup_Show('AYIJE_RL') end, function() return not E.db.unitframe.units.party.enable end)
-	ayijeoptions.UnitFrames.args.partyborder.args.PartySpaced = ACH:Toggle(L["Party Spaced"], nil, 4, nil, false, "full",function() return E.db.AYIJE.border.PartySpaced end,function(_, value) E.db.AYIJE.border.PartySpaced = value E:StaticPopup_Show('AYIJE_RL') end, function() return not E.db.unitframe.units.party.enable end)
-	ayijeoptions.UnitFrames.args.partyborder.args.partysep = ACH:Toggle(L["Separator"], nil, 5, nil, false, "full",function() return E.db.AYIJE.border.Partysep end,function(_, value) E.db.AYIJE.border.Partysep = value E:StaticPopup_Show('AYIJE_RL') end, function() return not E.db.unitframe.units.party.enable or not E.db.AYIJE.border.Party end)
-	
-	ayijeoptions.UnitFrames.args.raidborder = ACH:Group(L["Raid"], nil, 70, nil, nil, nil, function() return not E.db.unitframe.units.raid1.enable end, nil, nil)
-	ayijeoptions.UnitFrames.args.raidborder.args.desc = ACH:Group(L["Description"], nil, 1)
-	ayijeoptions.UnitFrames.args.raidborder.args.desc.inline = true
-	ayijeoptions.UnitFrames.args.raidborder.args.desc.args.feature = ACH:Description(L["Adds a border to the Raid Unitframe."], 1, "medium")
-	ayijeoptions.UnitFrames.args.raidborder.args.spacer = ACH:Header(L[""], 2)
-	ayijeoptions.UnitFrames.args.raidborder.args.raid = ACH:Toggle(L["Heal"], nil, 3, nil, false, "full",function() return E.db.AYIJE.border.raid end,function(_, value) E.db.AYIJE.border.raid = value E:StaticPopup_Show('AYIJE_RL') end, function() return not E.db.unitframe.units.raid1.enable end)
-	ayijeoptions.UnitFrames.args.raidborder.args.raidbackdrop = ACH:Toggle(L["Heal (Backdrop)"], nil, 4, nil, false, "full",function() return E.db.AYIJE.border.raidbackdrop end,function(_, value) E.db.AYIJE.border.raidbackdrop = value E:StaticPopup_Show('AYIJE_RL') end, nil, function() return not E.db.AYIJE.border.raid end)
-	ayijeoptions.UnitFrames.args.raidborder.args.raiddps = ACH:Toggle(L["DPS/TANK"], nil, 5, nil, false, "full",function() return E.db.AYIJE.border.raiddps end,function(_, value) E.db.AYIJE.border.raiddps = value E:StaticPopup_Show('AYIJE_RL') end, function() return not E.db.unitframe.units.raid1.enable end)
-	
 	ayijeoptions.UnitFrames.args.tankframeborder = ACH:Group(L["Tank Frames"], nil, 70, nil, nil, nil, function() return not E.db.unitframe.units.tank.enable end, nil, nil)
 	ayijeoptions.UnitFrames.args.tankframeborder.args.desc = ACH:Group(L["Description"], nil, 1)
 	ayijeoptions.UnitFrames.args.tankframeborder.args.desc.inline = true
