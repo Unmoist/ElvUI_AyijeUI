@@ -20,6 +20,7 @@ V.AYIJE = {
 
 -- Defaults: E.db.AYIJE
 P.AYIJE = {
+	targetGlow = false,
 	manaFrame = {
 		enable = false, 
 		glowline = false,

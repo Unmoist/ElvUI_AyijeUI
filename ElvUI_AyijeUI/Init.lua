@@ -33,6 +33,7 @@ Engine.Separator = {bgFile = "Interface\\AddOns\\ElvUI_AyijeUI\\Media\\Textures\
 Engine.AbsorbOverlay = "Interface\\AddOns\\ElvUI_AyijeUI\\Media\\Textures\\Shield-Overlay.blp"
 Engine.AbsorbGlow = "Interface\\AddOns\\ElvUI_AyijeUI\\Media\\Textures\\Shield-Overshield.blp"
 Engine.AbsorbTexture = "Interface\\AddOns\\ElvUI_AyijeUI\\Media\\Textures\\Shield-Fill.tga"
+Engine.TargetGlow = {bgFile = nil, edgeFile = "Interface\\AddOns\\ElvUI_AyijeUI\\Media\\Borders\\Targetglow.tga", tileSize = 0, edgeSize = 16, insets = {left = 8, right = 8, top = 8, bottom = 8}}
 
 ----------------------------------------------------------------------
 ------------------------------- Events -------------------------------

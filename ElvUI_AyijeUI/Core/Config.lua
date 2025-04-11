@@ -149,6 +149,12 @@ function AYIJE:Config()
 	ayijeoptions.UnitFrames.args.general.args.glowline.inline = true
 	ayijeoptions.UnitFrames.args.general.args.glowline.args.enable = ACH:Toggle(L["Health Glowline"], nil, 1, nil, false, "full", function() return E.db.AYIJE.unitframe.unitFramesGlowline end,function(_, value) E.db.AYIJE.unitframe.unitFramesGlowline = value E:StaticPopup_Show('AYIJE_RL') end)
 
+	ayijeoptions.UnitFrames.args.general.args.customtargetborder = ACH:Group(L["Target Border"], nil, 1)
+	ayijeoptions.UnitFrames.args.general.args.customtargetborder.args.desc = ACH:Group(L["Description"], nil, 1)
+	ayijeoptions.UnitFrames.args.general.args.customtargetborder.args.desc.inline = true
+	ayijeoptions.UnitFrames.args.general.args.customtargetborder.args.desc.args.feature = ACH:Description(L["Makes the Target Border a Solid frame and bring it in front of Unitframes."], 1, "medium")
+	ayijeoptions.UnitFrames.args.general.args.customtargetborder.args.enable = ACH:Toggle(L["Enable"], L['Toggle the Target Border frame. (Target Frame Glow MUST be enabled.)'], 2, nil, false, nil, function() return E.db.AYIJE.targetGlow end,function(_, value) E.db.AYIJE.targetGlow = value E:StaticPopup_Show('AYIJE_RL') end)
+	
 	ayijeoptions.UnitFrames.args.general.args.portraits = ACH:Group(L["Portraits"], nil, 4)
 	ayijeoptions.UnitFrames.args.general.args.portraits.inline = true
 	ayijeoptions.UnitFrames.args.general.args.portraits.args.classPortraits = ACH:Toggle(L["Class Portrait"], L["Use Class Portraits instead of Unit Portraits"], 1, nil, false, "full", function() return E.db.AYIJE.unitframe.classPortraits end,function(_, value) E.db.AYIJE.unitframe.classPortraits = value E:StaticPopup_Show('AYIJE_RL') end)
