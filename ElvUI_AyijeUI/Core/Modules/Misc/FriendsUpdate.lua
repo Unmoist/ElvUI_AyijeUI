@@ -168,7 +168,7 @@ function FU:UpdateFriendButton(button)
 					nameString = TimerunningUtil_AddSmallIcon(nameString) or nameString -- Add timerunning tag
 			end
 
-			local buttonTitle = realID .. " " .. nameString
+			local buttonTitle = (realID and realID .. " " or "") .. (nameString or "")
 
 			button.name:SetText(buttonTitle)
 	end
