@@ -7,21 +7,40 @@ local S = E:GetModule('Skins')
 local _G = _G
 local pairs = pairs
 
+local forceSeparators = false
+
 local function GetUnitFrame()
 	for i = 1, 2 do
 		for k = 2, 5 do
 			local unitName = "Grid2LayoutHeader" .. i .. "UnitButton" .. k
 			local unitButton = _G[unitName]
 			if unitButton then 
-				if not IsInRaid() then
+				if not IsInRaid() or forceSeparators then
 					BORDER:CreateSeparator(unitButton)
 					unitButton.separator:Show()
 					unitButton.separator:SetPoint("TOPRIGHT", unitButton, 0, 3)
-				elseif IsInRaid() and unitButton.separator then
+				elseif unitButton.separator then
 					unitButton.separator:Hide()
 				end
 			end
 		end
+	end
+end
+
+-- Slash command
+SLASH_GRID2SEPARATOR1 = "/grid2separator"
+SlashCmdList["GRID2SEPARATOR"] = function(msg)
+	msg = msg:lower()
+	if msg == "on" then
+		forceSeparators = true
+		Engine:Print("|cff00ff00Forced separators ON.")
+		GetUnitFrame()
+	elseif msg == "off" then
+		forceSeparators = false
+		Engine:Print("|cffff0000Forced separators OFF.")
+		GetUnitFrame()
+	else
+		Engine:Print("|cffffff00Usage: /grid2separator on|off")
 	end
 end
 
