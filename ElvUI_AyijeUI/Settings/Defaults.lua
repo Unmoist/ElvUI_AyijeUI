@@ -121,8 +121,7 @@ P.AYIJE = {
 		-- Bag
 		Bag = true,
 		Bagslot = true,
-		-- OmniCD
-		OmniCD = true,
+
 	},
 	skins = {
 		-- Addons
@@ -132,6 +131,7 @@ P.AYIJE = {
 		details = true,
 		detailsresize = true,
 		grid2 = true,
+		omnicd = true,
 		-- ElvUI
 		actionBarsBackdrop = true,
 		actionBarsButton = true,
