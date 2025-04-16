@@ -28,18 +28,22 @@ function S:ElvUI_UnitFrames_SkinCastBar(_, frame)
 		if self.channeling then
 			self:SetStatusBarTexture(blizzcastchannel)
 			self:SetStatusBarColor(1, 1, 1, 1)
+			self.bg:SetTexture(blizzcastback)
 			self.bg:SetVertexColor(1, 1, 1)
 		elseif not self.notInterruptible and self.unit and self.unit ~= "player" then
 			self:SetStatusBarTexture(blizzcast)
 			self:SetStatusBarColor(1, 1, 1, 1)
+			self.bg:SetTexture(blizzcastback)
 			self.bg:SetVertexColor(1, 1, 1)
 		elseif self.notInterruptible then
 			self:SetStatusBarTexture(blizzcastnonbreakable)
 			self:SetStatusBarColor(1, 1, 1, 1)
+			self.bg:SetTexture(blizzcastback)
 			self.bg:SetVertexColor(1, 1, 1)
 		else
 			self:SetStatusBarTexture(blizzcast)
 			self:SetStatusBarColor(1, 1, 1, 1)
+			self.bg:SetTexture(blizzcastback)
 			self.bg:SetVertexColor(1, 1, 1) 
 		end
 	end)
