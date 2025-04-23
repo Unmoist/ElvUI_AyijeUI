@@ -64,7 +64,7 @@ function B:UpdateSlotColors(slot, isQuestItem, questId, isActiveQuest)
 	UpdateSlotBorder(self, slot, isQuestItem, questId, isActiveQuest)
 
 	local questColors, r, g, b, a = B.db.qualityColors and (questId or isQuestItem) and B.QuestColors[not isActiveQuest and 'questStarter' or 'questItem']
-	local qR, qG, qB = B:GetItemQualityColor(slot.rarity)
+	local qR, qG, qB = E:GetItemQualityColor(slot.rarity)
 
 	if questColors then
 		r, g, b, a = unpack(questColors)
