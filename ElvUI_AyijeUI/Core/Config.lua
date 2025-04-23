@@ -83,7 +83,7 @@ function AYIJE:Config()
 	ayijeoptions.Modules.args.bigwigsIcons.args.desc.inline = true
 	ayijeoptions.Modules.args.bigwigsIcons.args.desc.args.feature = ACH:Description(L["This feature disables and enables BigWigs Nameplate Icons"], 1, "medium")
 	ayijeoptions.Modules.args.bigwigsIcons.args.spacer = ACH:Header(L[""], 2)
-	ayijeoptions.Modules.args.bigwigsIcons.args.enable = ACH:Toggle(L["BigWigs Nameplate Icons"], L["If enabled it disables all BigWigs nameplate Icons, if Disabled it activates all."], 4, nil, false, 'full', function() return E.db.AYIJEUI.BigWigsIcons end,function(_, value) E.db.AYIJEUI.BigWigsIcons = value E:StaticPopup_Show('AYIJE_RL') end, not E.Retail, not E.Retail)
+	ayijeoptions.Modules.args.bigwigsIcons.args.enable = ACH:Toggle(L["BigWigs Nameplate Icons"], L["If enabled it disables all BigWigs nameplate Icons, if Disabled it activates all."], 4, nil, false, 'full', function() return E.db.AYIJE.BigWigsIcons end,function(_, value) E.db.AYIJE.BigWigsIcons = value E:StaticPopup_Show('AYIJE_RL') end, not E.Retail, not E.Retail)
 	
 	ayijeoptions.Modules.args.manaframe = ACH:Group(L["Mana Frame"], nil, 1)
 	ayijeoptions.Modules.args.manaframe.args.desc = ACH:Group(L["Description"], nil, 1)
