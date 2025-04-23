@@ -3,4 +3,5 @@
 	<Script file='Unitframes_Glowline.lua'/>
 	<Script file='FriendsUpdate.lua'/>
 	<Script file='Misc.lua'/>
+	<Script file='BigWigsIcons.lua'/>
 </Ui>
