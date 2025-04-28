@@ -7,54 +7,64 @@ local S = E:GetModule('Skins')
 local _G = _G
 local pairs = pairs
 
-local forceSeparators = false
+if E.db.forceSeparators == nil then
+    E.db.forceSeparators = false
+end
 
 local function GetUnitFrame()
-	for i = 1, 2 do
-		for k = 2, 5 do
-			local unitName = "Grid2LayoutHeader" .. i .. "UnitButton" .. k
-			local unitButton = _G[unitName]
-			if unitButton then 
-				if not IsInRaid() or forceSeparators then
-					BORDER:CreateSeparator(unitButton)
-					unitButton.separator:Show()
-					unitButton.separator:SetPoint("TOPRIGHT", unitButton, 0, 3)
-				elseif unitButton.separator then
-					unitButton.separator:Hide()
-				end
-			end
-		end
-	end
+    for i = 1, 2 do
+        for k = 2, 5 do
+            local unitName = "Grid2LayoutHeader" .. i .. "UnitButton" .. k
+            local unitButton = _G[unitName]
+            if unitButton then 
+                if not IsInRaid() or E.db.forceSeparators then
+                    BORDER:CreateSeparator(unitButton)
+                    unitButton.separator:Show()
+                    unitButton.separator:SetPoint("TOPRIGHT", unitButton, 0, 3)
+                elseif unitButton.separator then
+                    unitButton.separator:Hide()
+                end
+            end
+        end
+    end
 end
 
 -- Slash command
 SLASH_GRID2SEPARATOR1 = "/grid2separator"
 SlashCmdList["GRID2SEPARATOR"] = function(msg)
-	msg = msg:lower()
-	if msg == "on" then
-		forceSeparators = true
-		Engine:Print("|cff00ff00Forced separators ON.")
-		GetUnitFrame()
-	elseif msg == "off" then
-		forceSeparators = false
-		Engine:Print("|cffff0000Forced separators OFF.")
-		GetUnitFrame()
-	else
-		Engine:Print("|cffffff00Usage: /grid2separator on|off")
-	end
+    msg = msg:lower()
+    if msg == "on" then
+        E.db.forceSeparators = true
+        Engine:Print("|cff00ff00Forced separators ON.")
+        GetUnitFrame()
+    elseif msg == "off" then
+        E.db.forceSeparators = false
+        Engine:Print("|cffff0000Forced separators OFF.")
+        GetUnitFrame()
+    else
+        Engine:Print("|cffffff00Usage: /grid2separator on|off")
+    end
 end
 
 function S:Grid2()
-  if not E.db.AYIJE.skins.grid2 then return end
-	local Grid2Layout = Grid2:GetModule("Grid2Layout")
-	local Grid2 = Grid2
+    if not E.db.AYIJE.skins.grid2 then return end
+    local Grid2Layout = Grid2:GetModule("Grid2Layout")
+    local Grid2 = Grid2
 
-  BORDER:CreateBorder(_G.Grid2LayoutFrame)
+    BORDER:CreateBorder(_G.Grid2LayoutFrame)
 
-	hooksecurefunc(Grid2Layout, "LoadLayout", GetUnitFrame)
+    hooksecurefunc(Grid2Layout, "LoadLayout", GetUnitFrame)
+
+    -- Reminder after /reload if separators are forced on
+    E:Delay(1, function()
+        if E.db.forceSeparators then
+            Engine:Print("|cffffff00Reminder: Forced separators are ON. Use /grid2separator off to disable.")
+        end
+    end)
 end
 
 S:AddCallbackForAddon("Grid2")
+
 
 -- Old code for safe keeping. 
 --[[
