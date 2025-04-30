@@ -151,5 +151,6 @@ P.AYIJE = {
 		totemTracker = true,
 		Minimap = true,
 		dataPanels = true,
+		character = true,
 	},
 }

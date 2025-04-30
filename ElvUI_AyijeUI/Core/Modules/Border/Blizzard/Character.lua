@@ -70,6 +70,9 @@ local function TabTextureCoords(tex, x1)
 end
 
 function S:Blizzard_UIPanels_Game()
+
+  if not E.db.AYIJE.skins.character then return end
+  
     if CharacterFrame:IsShown() then
       HideUIPanel(CharacterFrame)
     end
