@@ -224,7 +224,7 @@ function MB:UpdateLayout()
 	else
 		minimapButtonBar:SetPoint(direction and 'TOP' or 'BOTTOM', minimapButtonBarAnchor, direction and 'TOP' or 'BOTTOM', -2, 0)
 	end
-	minimapButtonBar:SetSize(E.minimapbuttons.db.buttonSize + 4, E.minimapbuttons.db.buttonSize + 4)
+	minimapButtonBar:SetSize(E.minimapbuttons.db.buttonSize + 4 or 44, E.minimapbuttons.db.buttonSize + 4 or 44)
 	
 	local lastFrame, anchor1, anchor2, offsetX, offsetY
 	
