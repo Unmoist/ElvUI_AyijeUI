@@ -207,7 +207,7 @@ function MB:UpdateLayout()
  	end
 
 	local AnchorX, AnchorY, MaxX = 0, 1, E.minimapbuttons.db.buttonsPerRow
-	local ButtonsPerRow = E.minimapbuttons.db.buttonsPerRow
+	local ButtonsPerRow = E.minimapbuttons.db.buttonsPerRow or 4
 	local NumColumns = ceil(#moveButtons / ButtonsPerRow)
 	local Spacing, Mult = 7, 1
 	local Size = E.minimapbuttons.db.buttonSize
