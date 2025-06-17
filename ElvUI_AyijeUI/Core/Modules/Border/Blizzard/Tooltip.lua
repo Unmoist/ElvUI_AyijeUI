@@ -48,8 +48,10 @@ function BORDER:GameTooltip_OnTooltipSetItem(data)
 end
 
 function BORDER:TT_GameTooltip_SetDefaultAnchor(tt)
-	if tt.StatusBar and not tt.StatusBar.backdrop.border then
-		BORDER:CreateBorder(tt.StatusBar.backdrop)
+	if tt.StatusBar and tt.StatusBar.backdrop then
+			if not tt.StatusBar.backdrop.border then
+					BORDER:CreateBorder(tt.StatusBar.backdrop)
+			end
 	end
 end
 
