@@ -5,10 +5,10 @@
 
 ## DefaultState: enabled
 ## Author: Unmoist
-## Version: 20250423
+## Version: 20250618
 
-## Interface: 110105
-## X-Required-ElvUI: 13.89
+## Interface: 110107
+## X-Required-ElvUI: 13.92
 ## IconTexture: Interface\AddOns\ElvUI_AyijeUI\Media\Textures\ajlogo.png
 
 RatioAuras.xml
