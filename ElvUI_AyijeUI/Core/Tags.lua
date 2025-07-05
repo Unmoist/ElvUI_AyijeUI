@@ -53,15 +53,14 @@ E:AddTag("Ayije:name", "UNIT_NAME_UPDATE UNIT_HEALTH UNIT_TARGET PLAYER_FLAGS_CH
 end)
 
 E:AddTag('Ayije:perpp', 'UNIT_POWER_FREQUENT UNIT_MAXPOWER UNIT_DISPLAYPOWER UNIT_CONNECTION', function(unit)
-	local status = UnitIsDead(unit) and L["Dead"] or UnitIsGhost(unit) and L["Ghost"] or not UnitIsConnected(unit) and L["Offline"]
-	local powerType = UnitPowerType(unit)
-	local cur = UnitPower(unit, powerType)
-	local max = UnitPowerMax(unit, powerType)
-	local curper = (UnitPower(unit, powerType)/UnitPowerMax(unit, powerType))*100
+    local status = UnitIsDead(unit) and L["Dead"] or UnitIsGhost(unit) and L["Ghost"] or not UnitIsConnected(unit) and L["Offline"]
+    local powerType = UnitPowerType(unit)
+    local cur = UnitPower(unit, powerType)
+    local max = UnitPowerMax(unit, powerType)
 
-	if (status) or (powerType ~= 0 and cur == 0) then
-			return nil
-	else
-			return format("%.0f", curper)
-	end
+    if status or (powerType ~= 0 and cur == 0) or max == 0 then
+        return nil
+    else
+        return format("%.0f", (cur / max) * 100)
+    end
 end)
