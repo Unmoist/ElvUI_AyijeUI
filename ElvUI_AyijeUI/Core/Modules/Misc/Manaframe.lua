@@ -38,7 +38,7 @@ local function UpdateManaBar()
 			maxPower = UnitPowerMax("player", powerType)
 	end
 	
-	local powerPercent = math.floor((power / maxPower) * 100) -- Calculate the percentage of power
+	local powerPercent = maxPower > 0 and math.floor((power / maxPower) * 100) or 0 -- Calculate the percentage of power
 	
 	Manaframe.manaBar:SetMinMaxValues(0, maxPower)
 	Manaframe.manaBar:SetValue(power)
