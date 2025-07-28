@@ -17,7 +17,7 @@ local function ShortenNumber(value)
 	end
 end
 
-local function UpdateManaBar()
+function MF:UpdateManaBar()
 	local power, maxPower
 	local powerType
 	
@@ -70,67 +70,68 @@ local function UpdateManaBar()
 	end
 end
 
-local function PortraitManaBar()
-	local ManaBarPlayerPortrait
-	local ManaBarPlayerframeEvent = CreateFrame("Frame")
-	ManaBarPlayerframeEvent:RegisterEvent("PLAYER_ENTERING_WORLD")
-	ManaBarPlayerframeEvent:RegisterEvent("PORTRAITS_UPDATED")
-	ManaBarPlayerframeEvent:SetScript("OnEvent", function(self, event)
-			if ManaBarPlayerPortrait then
-					ManaBarPlayerPortrait:Hide()
-					ManaBarPlayerPortrait = nil
-			end
-			if UnitExists("player") then
-				
-					local playerHeight = _G.Manaframe:GetHeight()
-					ManaBarPlayerPortrait = CreateFrame("Frame", nil, Manaframe, "BackdropTemplate")
-					ManaBarPlayerPortrait:SetSize(playerHeight + 20, playerHeight + 20)
-					ManaBarPlayerPortrait:SetPoint("RIGHT", Manaframe, "LEFT", 7, 0)
-					ManaBarPlayerPortrait:SetFrameLevel(Manaframe:GetFrameLevel() + 2)
+function MF:PortraitManaBar()
+	if self.ManaBarPlayerPortrait then	-- Cleanup old portrait if needed
+		self.ManaBarPlayerPortrait:Hide()
+		self.ManaBarPlayerPortrait = nil
+	end
 
-					local ManaBarPlayerPortraitTexture = ManaBarPlayerPortrait:CreateTexture(nil, "OVERLAY")
-					ManaBarPlayerPortraitTexture:SetAllPoints(ManaBarPlayerPortrait)
-					ManaBarPlayerPortraitTexture:SetTexture(Engine.Portrait)
-					SetPortraitTexture(ManaBarPlayerPortraitTexture, 'player')
+	if UnitExists("player") and Manaframe then	-- Create it now if player exists
+		local playerHeight = Manaframe:GetHeight()
+		self.ManaBarPlayerPortrait = CreateFrame("Frame", nil, Manaframe, "BackdropTemplate")
+		self.ManaBarPlayerPortrait:SetSize(playerHeight + 20, playerHeight + 20)
+		self.ManaBarPlayerPortrait:SetPoint("RIGHT", Manaframe, "LEFT", 7, 0)
+		self.ManaBarPlayerPortrait:SetFrameLevel(Manaframe:GetFrameLevel() + 2)
 
-					local ManaBarPlayerPortraitBorder = CreateFrame("Frame", nil, ManaBarPlayerPortrait, "BackdropTemplate")
-					ManaBarPlayerPortraitBorder:SetSize(ManaBarPlayerPortrait:GetHeight() + 60, ManaBarPlayerPortrait:GetWidth() + 60)
-					ManaBarPlayerPortraitBorder:SetPoint("CENTER", ManaBarPlayerPortrait, "CENTER")
+		local ManaBarPlayerPortraitTexture = self.ManaBarPlayerPortrait:CreateTexture(nil, "OVERLAY")
+		ManaBarPlayerPortraitTexture:SetAllPoints(self.ManaBarPlayerPortrait)
+		ManaBarPlayerPortraitTexture:SetTexture(Engine.Portrait)
+		SetPortraitTexture(ManaBarPlayerPortraitTexture, 'player')
 
-					local ManaBarPlayerPortraitBorderTexture = ManaBarPlayerPortraitBorder:CreateTexture(nil, "OVERLAY")
-					ManaBarPlayerPortraitBorderTexture:SetAllPoints(ManaBarPlayerPortraitBorder)
-					ManaBarPlayerPortraitBorderTexture:SetTexture(Engine.PortraitBorder)
-					ManaBarPlayerPortraitBorderTexture:SetVertexColor(1, 1, 1, 1)
-					ManaBarPlayerPortraitBorderTexture:SetDesaturated(true)
+		local ManaBarPlayerPortraitBorder = CreateFrame("Frame", nil, self.ManaBarPlayerPortrait, "BackdropTemplate")
+		ManaBarPlayerPortraitBorder:SetSize(self.ManaBarPlayerPortrait:GetHeight() + 60, self.ManaBarPlayerPortrait:GetWidth() + 60)
+		ManaBarPlayerPortraitBorder:SetPoint("CENTER", self.ManaBarPlayerPortrait, "CENTER")
 
-					local _, unitClass = UnitClass("player")
-					local isPlayer = UnitIsPlayer("player")
-					local color
+		local ManaBarPlayerPortraitBorderTexture = ManaBarPlayerPortraitBorder:CreateTexture(nil, "OVERLAY")
+		ManaBarPlayerPortraitBorderTexture:SetAllPoints(ManaBarPlayerPortraitBorder)
+		ManaBarPlayerPortraitBorderTexture:SetTexture(Engine.PortraitBorder)
+		ManaBarPlayerPortraitBorderTexture:SetVertexColor(1, 1, 1, 1)
+		ManaBarPlayerPortraitBorderTexture:SetDesaturated(true)
 
-					if isPlayer then
-							color = ElvUF.colors.class[unitClass]
-					else
-							color = ElvUF.colors.reaction[UnitReaction("player", 'player')]
-					end
+		local _, unitClass = UnitClass("player")
+		local isPlayer = UnitIsPlayer("player")
+		local color
 
-					ManaBarPlayerPortraitBorderTexture:SetVertexColor((color and color.r) or 0.8, (color and color.g) or 0.8, (color and color.b) or 0.8, 1)
-			end
-	end)
+		if isPlayer then
+			color = ElvUF.colors.class[unitClass]
+		else
+			color = ElvUF.colors.reaction[UnitReaction("player", 'player')]
+		end
+
+		ManaBarPlayerPortraitBorderTexture:SetVertexColor(
+			(color and color.r) or 0.8,
+			(color and color.g) or 0.8,
+			(color and color.b) or 0.8,
+			1
+		)
+	end
+
+	if not self.ManaBarPlayerframeEvent then
+		self.ManaBarPlayerframeEvent = CreateFrame("Frame")
+		self.ManaBarPlayerframeEvent:RegisterEvent("PLAYER_ENTERING_WORLD")
+		self.ManaBarPlayerframeEvent:RegisterEvent("PORTRAITS_UPDATED")
+		self.ManaBarPlayerframeEvent:SetScript("OnEvent", function()
+			self:PortraitManaBar() -- simply rebuild when needed
+		end)
+	end
 end
 
-function MF:Initialize()
-	if E.db.unitframe.units.player.enable then return end
-	if not E.db.AYIJE.manaFrame.enable then return end
+
+function MF:AYIJE_Manaframe()
+	if Manaframe then return end	-- If it's already created, don't recreate it
 
 	local width = E.db.AYIJE.manaFrame.width
 	local height = E.db.AYIJE.manaFrame.height
-
-	ManaFrameAnchor = CreateFrame("Frame", "ManaFrameAnchor", E.UIParent, 'BackdropTemplate')
-	ManaFrameAnchor:Point('CENTER', UIParent, 'CENTER')
-	ManaFrameAnchor:Size(width, height)
-	ManaFrameAnchor:SetFrameStrata("BACKGROUND")
-
-	E:CreateMover(ManaFrameAnchor, "Ayije: Mana Frame", "ManaframeMover", nil, nil, nil, "ALL")
 
 	Manaframe = CreateFrame("Frame", "Ayije_ManaFrame", UIParent, "BackdropTemplate")
 	Manaframe:Size(width, height)
@@ -190,11 +191,61 @@ function MF:Initialize()
 	end
 
 	Manaframe:SetScript("OnEvent", function(self, event, ...)
-			UpdateManaBar()
+			MF:UpdateManaBar()
 	end)
 
-	UpdateManaBar()
-	PortraitManaBar()
+	MF:UpdateManaBar()
+	MF:PortraitManaBar()
 end
 
-E:RegisterModule(MF:GetName());
+function MF:RemoveManaframe()
+	if Manaframe then
+		Manaframe:Hide()
+		Manaframe:SetScript("OnEvent", nil)
+		Manaframe:UnregisterAllEvents()
+		Manaframe:SetParent(nil)
+		Manaframe = nil
+	end
+end
+
+function MF:CheckIfHealerAndRun()
+	local spec = GetSpecialization()
+	if not spec then return end
+
+	local specID = GetSpecializationInfo(spec)
+	local healerSpecs = {
+		[105] = true, -- Restoration(Druid)
+		[270] = true, -- Mistweaver(Monk)
+		[65]  = true, -- Holy(Paladin)
+		[257] = true, -- Holy(Priest)
+		[256] = true, -- Discipline(Priest)
+		[264] = true, -- Restoration(Shaman)
+		[1468] = true, -- Preservation(Evoker)
+	}
+
+	if healerSpecs[specID] then
+		MF:AYIJE_Manaframe()
+		MF:UpdateManaBar()
+		MF:PortraitManaBar()
+	else
+		MF:RemoveManaframe()
+	end
+end
+
+function MF:Initialize()
+	if not E.db.AYIJE.manaFrame.enable then return end
+	
+	if not ManaFrameAnchor then
+		ManaFrameAnchor = CreateFrame("Frame", "ManaFrameAnchor", E.UIParent, 'BackdropTemplate')
+		ManaFrameAnchor:Point('CENTER', UIParent, 'CENTER')
+		ManaFrameAnchor:Size(E.db.AYIJE.manaFrame.width, E.db.AYIJE.manaFrame.height)
+		ManaFrameAnchor:SetFrameStrata("BACKGROUND")
+
+		E:CreateMover(ManaFrameAnchor, "Ayije: Mana Frame", "ManaframeMover", nil, nil, nil, "ALL")
+	end
+
+	MF:CheckIfHealerAndRun()
+	MF:RegisterEvent("PLAYER_TALENT_UPDATE", "CheckIfHealerAndRun")
+end
+
+E:RegisterModule(MF:GetName())
