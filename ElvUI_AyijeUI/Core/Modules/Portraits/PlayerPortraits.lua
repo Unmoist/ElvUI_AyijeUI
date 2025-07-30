@@ -31,7 +31,7 @@ function PP:Initialize()
             SetPortraitTexture(PlayerPortraitTexture, 'player')
 
             local PlayerPortraitBorder = CreateFrame("Frame", nil, PlayerPortrait, "BackdropTemplate")
-            PlayerPortraitBorder:SetSize(PlayerPortrait:GetHeight() + 60, PlayerPortrait:GetWidth() + 60)
+            PlayerPortraitBorder:SetSize(PlayerPortrait:GetWidth() * 2.2, PlayerPortrait:GetHeight() * 2.2)
             PlayerPortraitBorder:SetPoint("CENTER", PlayerPortrait, "CENTER")
 
             local PlayerPortraitBorderTexture = PlayerPortraitBorder:CreateTexture(nil, "OVERLAY")

@@ -30,7 +30,7 @@ function FP:Initialize()
             SetPortraitTexture(FocusPortraitTexture, 'focus')
 
             local FocusPortraitBorder = CreateFrame("Frame", nil, FocusPortrait, "BackdropTemplate")
-            FocusPortraitBorder:SetSize(FocusPortrait:GetHeight() + 60, FocusPortrait:GetWidth() + 60)
+            FocusPortraitBorder:SetSize(FocusPortrait:GetWidth() * 2.2, FocusPortrait:GetHeight() * 2.2)
             FocusPortraitBorder:SetPoint("CENTER", FocusPortrait, "CENTER")
 
             local FocusPortraitBorderTexture = FocusPortraitBorder:CreateTexture(nil, "OVERLAY")

@@ -32,7 +32,7 @@ function TP:Initialize()
             SetPortraitTexture(TargetPortraitTexture, 'target')
 
             local TargetPortraitBorder = CreateFrame("Frame", nil, TargetPortrait, "BackdropTemplate")
-            TargetPortraitBorder:SetSize(TargetPortrait:GetHeight() + 60, TargetPortrait:GetWidth() + 60)
+            TargetPortraitBorder:SetSize(TargetPortrait:GetWidth() * 2.2, TargetPortrait:GetHeight() * 2.2)
             TargetPortraitBorder:SetPoint("CENTER", TargetPortrait, "CENTER")
 
             local TargetPortraitBorderTexture = TargetPortraitBorder:CreateTexture(nil, "OVERLAY")
