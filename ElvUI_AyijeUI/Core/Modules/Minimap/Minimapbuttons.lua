@@ -171,7 +171,7 @@ function MB:SkinButton(frame)
 				end
 			end
 		end
-		frame:SetTemplate("Tranparent")
+		frame:SetTemplate("Transparent")
 
 		tinsert(moveButtons, name)
 		frame.isSkinned = true
@@ -373,14 +373,22 @@ function MB:PLAYER_ENTERING_WORLD()
     E:Delay(0.1, self.SkinMinimapButtons, self)
 end
 
-function MB:Initialize()
-	if not E.db.AYIJE.minimapbutton.enable then return end
-	E.minimapbuttons = MB
-	E.minimapbuttons.db = E.db.AYIJE.minimapbutton
-	
-	self:CreateFrames()
-
-	self:RegisterEvent("PLAYER_ENTERING_WORLD")
+function MB:ProfileUpdate()
+    E.minimapbuttons.db = E.db.AYIJE.minimapbutton
+    MB:UpdateLayout()
 end
+
+function MB:Initialize()
+    if not E.db.AYIJE or not E.db.AYIJE.minimapbutton.enable then return end
+
+    E.minimapbuttons = MB
+    E.minimapbuttons.db = E.db.AYIJE.minimapbutton
+
+    self:CreateFrames()
+    self:RegisterEvent("PLAYER_ENTERING_WORLD")
+
+    hooksecurefunc(E, "StaggeredUpdateAll", function() MB:ProfileUpdate() end)
+end
+
 
 E:RegisterModule(MB:GetName())
