@@ -8,7 +8,13 @@ local UnitIsGroupLeader = UnitIsGroupLeader
 local GetRaidTargetIndex = GetRaidTargetIndex
 local UNIT_TARGET = UNIT_TARGET
 local UNIT_HEALTH = UNIT_HEALTH
+local UnitHealthMax = UnitHealthMax
 local UNIT_NAME_UPDATE = UNIT_NAME_UPDATE
+local UnitHealth = UnitHealth
+local UnitIsDead = UnitIsDead
+local UnitIsGhost = UnitIsGhost
+local UnitIsConnected = UnitIsConnected
+local UnitGetTotalAbsorbs = UnitGetTotalAbsorbs
 
 -- Hex colors for raid markers
 local markerToHex = {
@@ -63,4 +69,21 @@ E:AddTag('Ayije:perpp', 'UNIT_POWER_FREQUENT UNIT_MAXPOWER UNIT_DISPLAYPOWER UNI
     else
         return format("%.0f", (cur / max) * 100)
     end
+end)
+
+E:AddTag('Ayije:perhp', 'UNIT_HEALTH UNIT_MAXHEALTH UNIT_ABSORB_AMOUNT_CHANGED UNIT_CONNECTION UNIT_NAME_UPDATE', function(unit)
+	local status = UnitIsDead(unit) and L["Dead"] or UnitIsGhost(unit) and L["Ghost"] or not UnitIsConnected(unit) and L["Offline"]
+	local absorb = UnitGetTotalAbsorbs(unit) or 0
+	local health = UnitHealth(unit)
+	local max = UnitHealthMax(unit)
+	local CurrentPercent = (health/max)*100
+	local absorbper = (absorb/max)*100
+	local tper = CurrentPercent + absorbper
+	if (status) then
+		return status
+	elseif	absorb == 0 then
+		return format("%.0f", CurrentPercent)
+	else
+		return format("%.0f", tper)
+	end
 end)
