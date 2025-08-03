@@ -74,6 +74,7 @@ local function GetUnitFrame()
                 end
                     
                     BORDER:CreateBorder(unitButton)
+                    unitButton.border:SetIgnoreParentAlpha(true)
                 end
             end
         end
