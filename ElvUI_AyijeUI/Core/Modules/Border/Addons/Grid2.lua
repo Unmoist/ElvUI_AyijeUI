@@ -24,6 +24,11 @@ local function GetUnitFrame()
         [1468] = true, -- Preservation(Evoker)
     }
 
+    if IsInRaid() then
+        BORDER:CreateBorder(_G.Grid2LayoutFrame)
+        return
+    end
+    
     if healerSpecs[specID] then
         for i = 1, 2 do
             for k = 1, 5 do -- Start at 1 now
