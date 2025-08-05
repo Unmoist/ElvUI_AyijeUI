@@ -208,6 +208,12 @@ function MF:RemoveManaframe()
 	end
 end
 
+local function UpdateStatusBarTexture()
+	if not Manaframe.manaBar then return end
+    local statusBarTexture = LSM:Fetch('statusbar', UF.db.statusbar)
+    Manaframe.manaBar:SetStatusBarTexture(statusBarTexture)
+end
+
 function MF:CheckIfHealerAndRun()
 	local spec = GetSpecialization()
 	if not spec then return end
@@ -234,7 +240,7 @@ end
 
 function MF:Initialize()
 	if not E.db.AYIJE.manaFrame.enable then return end
-	
+
 	if not ManaFrameAnchor then
 		ManaFrameAnchor = CreateFrame("Frame", "ManaFrameAnchor", E.UIParent, 'BackdropTemplate')
 		ManaFrameAnchor:Point('CENTER', UIParent, 'CENTER')
@@ -243,6 +249,8 @@ function MF:Initialize()
 
 		E:CreateMover(ManaFrameAnchor, "Ayije: Mana Frame", "ManaframeMover", nil, nil, nil, "ALL")
 	end
+
+  hooksecurefunc(UF, "Update_StatusBar", UpdateStatusBarTexture)
 
 	MF:CheckIfHealerAndRun()
 	MF:RegisterEvent("PLAYER_TALENT_UPDATE", "CheckIfHealerAndRun")
