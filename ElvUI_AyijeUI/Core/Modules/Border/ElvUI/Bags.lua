@@ -117,18 +117,19 @@ function S:ElvUI_Bags()
 
 	BORDER:CreateBorder(_G.BankItemSearchBox)
 	if E.Retail then
-		BORDER:CreateBorder(_G.ReagentBankFrame.DespositButton)
-
-		if _G.ElvUI_BankContainerFrameWarbandHolder.cover then
-			BORDER:CreateBorder(_G.ElvUI_BankContainerFrameWarbandHolder.cover)
-			BORDER:CreateBorder(_G.ElvUI_BankContainerFrameWarbandHolder.cover.purchaseButton, nil, nil, nil, nil, nil, false, true)
+		if _G.ReagentBankFrame then
+			BORDER:CreateBorder(_G.ReagentBankFrame.DespositButton)
+		end
+		if _G.ElvUI_BankContainerFrameWarbandTabs then
+			BORDER:CreateBorder(_G.ElvUI_BankContainerFrameWarbandTabs)
+			BORDER:CreateBorder(_G.ElvUI_BankContainerFrameWarbandTabs.purchaseButton, nil, nil, nil, nil, nil, false, true)
 		end
 
-		_G.ElvUI_BankContainerFrameContainerHolder:SetBackdropColor(1, 1, 1, 0)
-		_G.ElvUI_BankContainerFrameContainerHolder:SetBackdropBorderColor(1, 1, 1, 0)
+		_G.ElvUI_BankContainerFrameWarbandTabs:SetBackdropColor(1, 1, 1, 0)
+		_G.ElvUI_BankContainerFrameWarbandTabs:SetBackdropBorderColor(1, 1, 1, 0)
 	
-		_G.ElvUI_BankContainerFrameWarbandHolder:SetBackdropColor(1, 1, 1, 0)
-		_G.ElvUI_BankContainerFrameWarbandHolder:SetBackdropBorderColor(1, 1, 1, 0)
+		_G.ElvUI_BankContainerFrameWarbandTabs:SetBackdropColor(1, 1, 1, 0)
+		_G.ElvUI_BankContainerFrameWarbandTabs:SetBackdropBorderColor(1, 1, 1, 0)
 	end
 	BORDER:CreateBorder(_G.BagItemAutoSortButton)
 	BORDER:CreateBorder(_G.BankItemAutoSortButton)
