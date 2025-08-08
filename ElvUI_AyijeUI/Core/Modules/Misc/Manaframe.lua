@@ -209,9 +209,12 @@ function MF:RemoveManaframe()
 end
 
 local function UpdateStatusBarTexture()
-	if not Manaframe.manaBar then return end
+	if Manaframe and Manaframe.manaBar then
     local statusBarTexture = LSM:Fetch('statusbar', UF.db.statusbar)
     Manaframe.manaBar:SetStatusBarTexture(statusBarTexture)
+	else
+		return
+	end
 end
 
 function MF:CheckIfHealerAndRun()
