@@ -27,63 +27,62 @@ local function GetUnitFrame()
     if IsInRaid() then
         BORDER:CreateBorder(_G.Grid2LayoutFrame)
         return
-    end
-    
-    if healerSpecs[specID] then
-        for i = 1, 2 do
-            for k = 1, 5 do -- Start at 1 now
-                local unitName = "Grid2LayoutHeader" .. i .. "UnitButton" .. k
-                local unitButton = _G[unitName]
+    else
+        if healerSpecs[specID] then
+            for i = 1, 2 do
+                for k = 1, 5 do -- Start at 1 now
+                    local unitName = "Grid2LayoutHeader" .. i .. "UnitButton" .. k
+                    local unitButton = _G[unitName]
 
-                BORDER:CreateBorder(_G.Grid2LayoutFrame)
+                    BORDER:CreateBorder(_G.Grid2LayoutFrame)
 
-                if unitButton then 
-                    -- Always try to remove border
-                    if unitButton.border then 
-                        unitButton.border:Hide()
-                        unitButton.border = nil
-                        unitButton.IsBorder = false
-                    end
+                    if unitButton then 
+                        -- Always try to remove border
+                        if unitButton.border then 
+                            unitButton.border:Hide()
+                            unitButton.border = nil
+                            unitButton.IsBorder = false
+                        end
 
-                    -- Only affect separator if k > 1
-                    if k > 1 then
-                        if not IsInRaid() or E.db.forceSeparators then
-                            BORDER:CreateSeparator(unitButton)
-                            unitButton.separator:Show()
-                            unitButton.separator:SetPoint("TOPRIGHT", unitButton, 0, 3)
-                        elseif unitButton.separator then
-                            unitButton.separator:Hide()
+                        -- Only affect separator if k > 1
+                        if k > 1 then
+                            if not IsInRaid() or E.db.forceSeparators then
+                                BORDER:CreateSeparator(unitButton)
+                                unitButton.separator:Show()
+                                unitButton.separator:SetPoint("TOPRIGHT", unitButton, 0, 3)
+                            elseif unitButton.separator then
+                                unitButton.separator:Hide()
+                            end
                         end
                     end
                 end
             end
-        end
+        else
+            for o = 1, 2 do
+                for u = 1, 5 do
+                    local unitName = "Grid2LayoutHeader" .. o .. "UnitButton" .. u
+                    local unitButton = _G[unitName]
 
-    else
-        for o = 1, 2 do
-            for u = 1, 5 do
-                local unitName = "Grid2LayoutHeader" .. o .. "UnitButton" .. u
-                local unitButton = _G[unitName]
-
-                if unitButton then
-                    if unitButton.separator then
-                        unitButton.separator:Hide()
-                        unitButton.separator = nil
+                    if unitButton then
+                        if unitButton.separator then
+                            unitButton.separator:Hide()
+                            unitButton.separator = nil
+                        end
+                    if _G.Grid2LayoutFrame.border then
+                        _G.Grid2LayoutFrame.border:Hide()
+                        _G.Grid2LayoutFrame.border:ClearAllPoints()
+                        _G.Grid2LayoutFrame.border:SetParent(nil)
+                        _G.Grid2LayoutFrame.border = nil
+                        _G.Grid2LayoutFrame.IsBorder = false
                     end
-                if _G.Grid2LayoutFrame.border then
-                    _G.Grid2LayoutFrame.border:Hide()
-                    _G.Grid2LayoutFrame.border:ClearAllPoints()
-                    _G.Grid2LayoutFrame.border:SetParent(nil)
-                    _G.Grid2LayoutFrame.border = nil
-                    _G.Grid2LayoutFrame.IsBorder = false
-                end
-                    
-                    BORDER:CreateBorder(unitButton)
-                    unitButton.border:SetIgnoreParentAlpha(true)
+                        
+                        BORDER:CreateBorder(unitButton)
+                        unitButton.border:SetIgnoreParentAlpha(true)
+                    end
                 end
             end
-        end
-    end 
+        end 
+    end    
 end
 
 -- Slash command
