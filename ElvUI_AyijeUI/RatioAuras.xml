@@ -394,6 +394,7 @@
 	<Button name='ElvUIAuraTemplate4830' inherits='ElvUIAuraTemplate' virtual='true'><Size x='48' y='30'/></Button>
 	<Button name='ElvUIAuraTemplate4832' inherits='ElvUIAuraTemplate' virtual='true'><Size x='48' y='32'/></Button>
 	<Button name='ElvUIAuraTemplate4834' inherits='ElvUIAuraTemplate' virtual='true'><Size x='48' y='34'/></Button>
+	<Button name='ElvUIAuraTemplate4835' inherits='ElvUIAuraTemplate' virtual='true'><Size x='48' y='35'/></Button>
 	<Button name='ElvUIAuraTemplate4836' inherits='ElvUIAuraTemplate' virtual='true'><Size x='48' y='36'/></Button>
 	<Button name='ElvUIAuraTemplate4838' inherits='ElvUIAuraTemplate' virtual='true'><Size x='48' y='38'/></Button>
 	<Button name='ElvUIAuraTemplate4840' inherits='ElvUIAuraTemplate' virtual='true'><Size x='48' y='40'/></Button>
