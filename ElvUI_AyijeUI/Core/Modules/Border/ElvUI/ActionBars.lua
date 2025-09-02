@@ -29,7 +29,7 @@ function S:ElvUI_ActionBar_SkinButton(button, useBackdrop)
 			return
 	end
 
-	BORDER:CreateBorder(button, 2)
+	BORDER:CreateBorder(button, 3)
 	button.BorderShadow:Kill()
 	button:GetPushedTexture():SetAlpha(0)
 	button:GetHighlightTexture():SetAlpha(0)
@@ -258,7 +258,7 @@ function S:ElvUI_ActionBars()
 			AB,
 			"SetupFlyoutButton",
 			function(_, button)
-				BORDER:CreateBorder(button)
+				BORDER:CreateBorder(button, 3)
 			end)
 	end
 
