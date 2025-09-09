@@ -11,5 +11,4 @@
 ## X-Required-ElvUI: 13.95
 ## IconTexture: Interface\AddOns\ElvUI_AyijeUI\Media\Textures\ajlogo.png
 
-RatioAuras.xml
 Load.xml
