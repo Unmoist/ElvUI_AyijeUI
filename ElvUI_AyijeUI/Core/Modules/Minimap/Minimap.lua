@@ -88,8 +88,8 @@ function RMM:Initialize()
 		_G.Minimap:Point('TOPRIGHT', _G.ElvUI_MinimapHolder, 'TOPRIGHT', -E.Border, E.Border)
 		
 		-- Update the size and position of the Minimap
-		_G.Minimap.backdrop:ClearAllPoints()
-		_G.Minimap.backdrop:SetOutside(Minimap, mmOffset, -halfDiff * mmScale + mmOffset)
+		--_G.Minimap.backdrop:ClearAllPoints()
+		--_G.Minimap.backdrop:SetOutside(Minimap, mmOffset, -halfDiff * mmScale + mmOffset)
 
 		RMM:UpdateLocationText()
 		RMM:UpdateMoverSize()
