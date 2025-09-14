@@ -84,12 +84,12 @@ function RMM:Initialize()
 		_G.Minimap:SetMaskTexture(Engine.MinimapRectangle)
 		_G.Minimap:SetHitRectInsets(0, 0, halfDiff, halfDiff)
 		_G.Minimap:SetClampRectInsets(0, 0, 0, 0)
-		_G.Minimap:ClearAllPoints()
-		_G.Minimap:Point('TOPRIGHT', _G.ElvUI_MinimapHolder, 'TOPRIGHT', -E.Border, E.Border)
+		--_G.Minimap:ClearAllPoints()
+		--_G.Minimap:Point('TOPRIGHT', _G.ElvUI_MinimapHolder, 'TOPRIGHT', -E.Border, E.Border)
 		
 		-- Update the size and position of the Minimap
-		--_G.Minimap.backdrop:ClearAllPoints()
-		--_G.Minimap.backdrop:SetOutside(Minimap, mmOffset, -halfDiff * mmScale + mmOffset)
+		_G.Minimap.backdrop:ClearAllPoints()
+		_G.Minimap.backdrop:SetOutside(Minimap, mmOffset, -halfDiff * mmScale + mmOffset)
 
 		RMM:UpdateLocationText()
 		RMM:UpdateMoverSize()
