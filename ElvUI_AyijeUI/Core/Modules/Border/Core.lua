@@ -345,7 +345,12 @@ do
         if r == E.db.general.bordercolor.r and g == E.db.general.bordercolor.g and b == E.db.general.bordercolor.b then
             BORDER:UpdateBorderColor(border)
         else
-            border:SetBackdrop(Engine.BorderLight)
+            if r == 1 and g == 1 and b == 1 then 
+                border:SetBackdrop(Engine.Border)
+            else 
+                border:SetBackdrop(Engine.BorderLight)
+            end
+
             BORDER:UpdateBorderColor(border, r / 0.6, g / 0.6, b / 0.6)
         end
     end
