@@ -338,13 +338,24 @@ end
 
 do
     local function colorCallback(border, r, g, b)
-        if not r or not g or not b then
+        -- 1. Ensure r, g, and b are actually numbers
+        if type(r) ~= "number" or type(g) ~= "number" or type(b) ~= "number" then
+            BORDER:UpdateBorderColor(border, 1, 1, 1) -- Fallback to white
             return
         end
 
-        if r == E.db.general.bordercolor.r and g == E.db.general.bordercolor.g and b == E.db.general.bordercolor.b then
+        -- 2. Ensure ElvUI DB values exist to prevent comparison errors
+        local dbColor = E.db.general.bordercolor
+        if not dbColor then
+            BORDER:UpdateBorderColor(border, r, g, b)
+            return
+        end
+
+        -- 3. Now it is safe to compare
+        if r == dbColor.r and g == dbColor.g and b == dbColor.b then
             BORDER:UpdateBorderColor(border)
         else
+            -- Logic for light borders
             if r == 1 and g == 1 and b == 1 then 
                 border:SetBackdrop(Engine.Border)
             else 

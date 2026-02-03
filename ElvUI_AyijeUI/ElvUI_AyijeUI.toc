@@ -7,7 +7,7 @@
 ## Author: Unmoist
 ## Version: 20250806
 
-## Interface: 110200
+## Interface: 120000
 ## X-Required-ElvUI: 13.95
 ## IconTexture: Interface\AddOns\ElvUI_AyijeUI\Media\Textures\ajlogo.png
 

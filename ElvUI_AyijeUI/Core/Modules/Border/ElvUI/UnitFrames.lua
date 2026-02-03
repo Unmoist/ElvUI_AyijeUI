@@ -138,7 +138,7 @@ function S:ElvUI_UnitFrames_PostUpdateAura(uf, _, button)
 
     if not button.IsBorder then
         BORDER:CreateBorder(button)
-        BORDER:BindBorderColorWithBorder(button.border, button)
+        --BORDER:BindBorderColorWithBorder(button.border, button)
         button.IsBorder = true
     end
 

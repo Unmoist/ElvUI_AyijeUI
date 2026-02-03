@@ -1,59 +1,77 @@
 local AddonName, Engine = ...
 local E, L, V, P, G = unpack(ElvUI)
 local BORDER = E:GetModule('BORDER')
-
 local S = E:GetModule('Skins')
 local UF = E:GetModule("UnitFrames")
 
+-- Texture paths
 local blizzcastback = "Interface\\AddOns\\ElvUI_AyijeUI\\Media\\Statusbar\\blizzcastback.tga"
-local blizzcast = "Interface\\AddOns\\ElvUI_AyijeUI\\Media\\Statusbar\\blizzcast.tga"
-local blizzcastchannel = "Interface\\AddOns\\ElvUI_AyijeUI\\Media\\Statusbar\\blizzcastchannel.tga"
-local blizzcastnonbreakable = "Interface\\AddOns\\ElvUI_AyijeUI\\Media\\Statusbar\\blizzcastnonbreakable.tga"
+local blizzcast = [[UI-CastingBar-Filling-Standard]] 
+local blizzcastchannel = [[UI-CastingBar-Filling-Channel]] 
+local blizzcastnonbreakable = [[UI-CastingBar-Uninterruptable]]
 
-function S:ElvUI_UnitFrames_SkinCastBar(_, frame)
-	if not frame.Castbar then	return end
+---------------------------------------------------
+-- Texture Logic Helper
+---------------------------------------------------
+local function UpdateCastBarTexture(self, unit)
+    if not self then return end
 
-	if not frame.TEXTURESET then
-		frame.Castbar:SetStatusBarTexture(blizzcast)
-		frame.Castbar.bg:SetTexture(blizzcastback)
-		frame.TEXTURESET = true
-	end
-	
-	if frame.CastbarSkinned then return end
+    -- Protection against "Secret Value" API
+    local notInterruptible = E:NotSecretValue(self.notInterruptible) and self.notInterruptible
+    local channeling = E:NotSecretValue(self.channeling) and self.channeling
 
-	BORDER:CreateBorder(frame.Castbar.backdrop)
-	BORDER:CreateBorder(frame.Castbar.ButtonIcon.bg)
-
-	frame.Castbar:HookScript("OnValueChanged", function(self)
-		if self.channeling then
-			self:SetStatusBarTexture(blizzcastchannel)
-			self:SetStatusBarColor(1, 1, 1, 1)
-			self.bg:SetTexture(blizzcastback)
-			self.bg:SetVertexColor(1, 1, 1)
-		elseif not self.notInterruptible and self.unit and self.unit ~= "player" then
-			self:SetStatusBarTexture(blizzcast)
-			self:SetStatusBarColor(1, 1, 1, 1)
-			self.bg:SetTexture(blizzcastback)
-			self.bg:SetVertexColor(1, 1, 1)
-		elseif self.notInterruptible then
-			self:SetStatusBarTexture(blizzcastnonbreakable)
-			self:SetStatusBarColor(1, 1, 1, 1)
-			self.bg:SetTexture(blizzcastback)
-			self.bg:SetVertexColor(1, 1, 1)
-		else
-			self:SetStatusBarTexture(blizzcast)
-			self:SetStatusBarColor(1, 1, 1, 1)
-			self.bg:SetTexture(blizzcastback)
-			self.bg:SetVertexColor(1, 1, 1) 
-		end
-	end)
-	frame.CastbarSkinned = true
+    -- 1. Apply Texture based on state (Visual Only)
+    -- PRIORITY: Non-interruptible should always take precedence over channeling
+    if notInterruptible and (UnitIsPlayer(unit) or (unit ~= 'player' and UnitCanAttack('player', unit))) then
+        self:SetStatusBarTexture(blizzcastnonbreakable)
+    elseif channeling then
+        self:SetStatusBarTexture(blizzcastchannel)
+    else
+        self:SetStatusBarTexture(blizzcast)
+    end
+    
+    -- 2. Force Color and Background (Visual Only)
+    self:SetStatusBarColor(1, 1, 1, 1)
+    
+    if self.bg and self.bg.SetTexture then
+        self.bg:SetTexture(blizzcastback)
+        self.bg:SetVertexColor(1, 1, 1, 1)
+    end
 end
 
-function S:ElvUI_CastBars()
-	if not E.private.unitframe.enable then return end
+---------------------------------------------------
+-- Skinning Function
+---------------------------------------------------
+function S:ElvUI_UnitFrames_SkinCastBar(_, frame)
+    local castbar = frame.Castbar
+    if not castbar or frame.CastbarSkinned then return end
 
-	S:SecureHook(UF, "Configure_Castbar", "ElvUI_UnitFrames_SkinCastBar")
+    -- Apply Borders (Only once)
+    if castbar.backdrop then 
+        BORDER:CreateBorder(castbar.backdrop) 
+    end
+    if castbar.ButtonIcon and castbar.ButtonIcon.bg then 
+        BORDER:CreateBorder(castbar.ButtonIcon.bg) 
+    end
+
+    -- Hook state changes safely.
+    if castbar.PostCastStart then
+        hooksecurefunc(castbar, "PostCastStart", UpdateCastBarTexture)
+    end
+
+    if castbar.PostCastInterruptible then
+        hooksecurefunc(castbar, "PostCastInterruptible", UpdateCastBarTexture)
+    end
+
+    frame.CastbarSkinned = true
+end
+
+---------------------------------------------------
+-- Hook Into ElvUI
+---------------------------------------------------
+function S:ElvUI_CastBars()
+    if not E.private.unitframe.enable then return end
+    S:SecureHook(UF, "Configure_Castbar", "ElvUI_UnitFrames_SkinCastBar")
 end
 
 S:AddCallback("ElvUI_CastBars")

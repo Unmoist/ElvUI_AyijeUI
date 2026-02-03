@@ -42,7 +42,7 @@ end
 
 local function GetUnitFrame()
     local spec = GetSpecialization()
-    local specID = GetSpecializationInfo(spec)
+    local specID = spec and GetSpecializationInfo(spec) or nil
     local healerSpecs = {
         [105] = true, -- Restoration(Druid)
         [270] = true, -- Mistweaver(Monk)
@@ -53,66 +53,95 @@ local function GetUnitFrame()
         [1468] = true, -- Preservation(Evoker)
     }
 
-    if IsInRaid() then
+    -- Only perform the raid-layout cleanup and single layout border when NOT forcing separators.
+    -- If forceSeparators is true we want the healer party separator creation to run even while in raid.
+    if IsInRaid() and not E.db.forceSeparators then
         -- Clean up individual frame borders first before creating layout frame border
         CleanupIndividualFrameBorders()
         BORDER:CreateBorder(_G.Grid2LayoutFrame)
         return
-    else
-        if healerSpecs[specID] then
-            for i = 1, 2 do
-                for k = 1, 5 do -- Start at 1 now
-                    local unitName = "Grid2LayoutHeader" .. i .. "UnitButton" .. k
-                    local unitButton = _G[unitName]
+    end
 
-                    BORDER:CreateBorder(_G.Grid2LayoutFrame)
+    -- At this point either we're not in raid, or forceSeparators is true.
+    -- If healer spec, create separators for party frames (this runs even in raid when forced).
+    if specID and healerSpecs[specID] then
+        -- Create a border around the entire layout frame once
+        if not _G.Grid2LayoutFrame.border then
+            BORDER:CreateBorder(_G.Grid2LayoutFrame)
+        else
+            _G.Grid2LayoutFrame.border:Show()
+        end
 
-                    if unitButton then 
-                        -- Always try to remove border
-                        if unitButton.border then 
-                            unitButton.border:Hide()
-                            unitButton.border = nil
-                            unitButton.IsBorder = false
-                        end
+        for i = 1, 2 do
+            for k = 1, 5 do -- Start at 1
+                local unitName = "Grid2LayoutHeader" .. i .. "UnitButton" .. k
+                local unitButton = _G[unitName]
 
-                        -- Only affect separator if k > 1
-                        if k > 1 then
-                            if not IsInRaid() or E.db.forceSeparators then
+                if unitButton then
+                    -- Always try to remove any per-unit border that might exist
+                    if unitButton.border then 
+                        unitButton.border:Hide()
+                        unitButton.border = nil
+                        unitButton.IsBorder = false
+                    end
+
+                    -- Only create separators for k > 1 (and only if not hidden by other logic)
+                    if k > 1 then
+                        -- Create/show separator if not in raid OR if forceSeparators is enabled
+                        if not IsInRaid() or E.db.forceSeparators then
+                            if not unitButton.separator then
                                 BORDER:CreateSeparator(unitButton)
+                            else
                                 unitButton.separator:Show()
-                                unitButton.separator:SetPoint("TOPRIGHT", unitButton, 0, 3)
-                            elseif unitButton.separator then
-                                unitButton.separator:Hide()
                             end
+                            -- Position separator consistently
+                            if unitButton.separator then
+                                unitButton.separator:SetPoint("TOPRIGHT", unitButton, 0, 3)
+                            end
+                        elseif unitButton.separator then
+                            unitButton.separator:Hide()
+                        end
+                    else
+                        -- ensure first column separator removed
+                        if unitButton.separator then
+                            unitButton.separator:Hide()
                         end
                     end
                 end
             end
-        else
-            for o = 1, 2 do
-                for u = 1, 5 do
-                    local unitName = "Grid2LayoutHeader" .. o .. "UnitButton" .. u
-                    local unitButton = _G[unitName]
+        end
 
-                    if unitButton then
-                        if unitButton.separator then
-                            unitButton.separator:Hide()
-                            unitButton.separator = nil
-                        end
-                    if _G.Grid2LayoutFrame.border then
+    else
+        -- Non-healer behavior: restore per-unit borders and hide separators
+        for o = 1, 2 do
+            for u = 1, 5 do
+                local unitName = "Grid2LayoutHeader" .. o .. "UnitButton" .. u
+                local unitButton = _G[unitName]
+
+                if unitButton then
+                    -- Remove separator if present
+                    if unitButton.separator then
+                        unitButton.separator:Hide()
+                        unitButton.separator = nil
+                    end
+
+                    -- Remove layout frame border if present (we'll create per-unit borders below)
+                    if _G.Grid2LayoutFrame and _G.Grid2LayoutFrame.border then
                         _G.Grid2LayoutFrame.border:Hide()
                         _G.Grid2LayoutFrame.border:ClearAllPoints()
                         _G.Grid2LayoutFrame.border:SetParent(nil)
                         _G.Grid2LayoutFrame.border = nil
                         _G.Grid2LayoutFrame.IsBorder = false
                     end
-                        
-                        BORDER:CreateBorder(unitButton)
+
+                    -- Create per-unit border
+                    BORDER:CreateBorder(unitButton)
+                    if unitButton.border then
                         unitButton.border:SetIgnoreParentAlpha(true)
                     end
                 end
             end
-        end 
+        end
     end    
 end
 
@@ -144,7 +173,7 @@ function S:Grid2()
     local Grid2 = Grid2
 
     hooksecurefunc(Grid2Layout, "LoadLayout", Grid2GetUnitFrame)
-	S:RegisterEvent("PLAYER_TALENT_UPDATE", Grid2GetUnitFrame)
+    S:RegisterEvent("PLAYER_TALENT_UPDATE", Grid2GetUnitFrame)
 
     -- Reminder after /reload if separators are forced on
     E:Delay(1, function()

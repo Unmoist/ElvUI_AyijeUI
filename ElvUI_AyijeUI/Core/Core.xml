@@ -2,5 +2,4 @@
 	<Include file="Modules\Modules.xml"/>
 	<Script file='Config.lua'/>
 	<Script file='Core.lua'/>
-	<Script file='Tags.lua'/>
 </Ui>
