@@ -13,9 +13,10 @@ function S:InputMethodEditor()
 		local langIcon = _G["ChatFrame" .. i .. "EditBoxLanguage"]
 
 		if editBox then
+			BORDER:CreateBorder(editBox)
 			if langIcon then
 				langIcon:StripTextures()
-				langIcon:CreateBackdrop(	"Transparent")
+				langIcon:CreateBackdrop("Transparent")
 				langIcon:Size(20, 22)
 				langIcon:ClearAllPoints()
 				langIcon:Point("TOPLEFT", editBox, "TOPRIGHT", 7, 0)
