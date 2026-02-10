@@ -1,5 +1,6 @@
 <Ui xmlns='http://www.blizzard.com/wow/ui/'>
 	<Include file="Modules\Modules.xml"/>
-	<Script file='Config.lua'/>
+	<Include file="Options\Options.xml"/>
+
 	<Script file='Core.lua'/>
 </Ui>

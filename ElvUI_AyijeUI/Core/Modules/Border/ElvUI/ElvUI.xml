@@ -16,4 +16,5 @@
 	<Script file='TotemTracker.lua'/>
 	<Script file='UnitFrames.lua'/>
 	<Script file='DataPanels.lua'/>
+	<Script file='Nameplates.lua'/>
 </Ui>

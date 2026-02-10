@@ -152,5 +152,6 @@ P.AYIJE = {
 		Minimap = true,
 		dataPanels = true,
 		character = true,
+		nameplates = true,
 	},
 }

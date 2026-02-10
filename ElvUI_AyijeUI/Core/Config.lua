@@ -311,7 +311,8 @@ function AYIJE:Config()
 		"statusReport",
 		"totemTracker",
 		"Minimap",
-		"Character"
+		"Character",
+		"Nameplates",
 	}
 
 	ayijeoptions.Skins.args.Elvui = ACH:Group(L["ElvUI"], nil, 1)
@@ -341,6 +342,7 @@ function AYIJE:Config()
 	ayijeoptions.Skins.args.Elvui.args.minimap = ACH:Toggle(L["MiniMap"], nil, 3, nil, false, nil, function() return E.db.AYIJE.skins.Minimap end,function(_, value) E.db.AYIJE.skins.Minimap = value E:StaticPopup_Show('AYIJE_RL') end, function() return not E.private.general.minimap.enable end)
 	ayijeoptions.Skins.args.Elvui.args.dataPanels = ACH:Toggle(L["DataPanels"], nil, 3, nil, false, nil, function() return E.db.AYIJE.skins.dataPanels end,function(_, value) E.db.AYIJE.skins.dataPanels = value E:StaticPopup_Show('AYIJE_RL') end)
 	ayijeoptions.Skins.args.Elvui.args.character = ACH:Toggle(L["Character"], nil, 3, nil, false, nil, function() return E.db.AYIJE.skins.character end,function(_, value) E.db.AYIJE.skins.character = value E:StaticPopup_Show('AYIJE_RL') end)
+	ayijeoptions.Skins.args.Elvui.args.nameplates = ACH:Toggle(L["NamePlates"], nil, 3, nil, false, nil, function() return E.db.AYIJE.skins.nameplates end,function(_, value) E.db.AYIJE.skins.nameplates = value E:StaticPopup_Show('AYIJE_RL') end)
 
 	E.Options.args.AYIJE = AYIJE.Options
 

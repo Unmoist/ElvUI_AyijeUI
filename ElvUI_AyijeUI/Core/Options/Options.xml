@@ -1,0 +1,14 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">\
+	<!-- Core Config -->
+	<Script file='Core.lua'/>
+
+	<!-- Modules -->
+	<Script file='ManaFrame.lua'/>
+	<Script file='Rectangleminimap.lua'/>
+	<Script file='Minimapbuttons.lua'/>
+	<Script file='Minimapid.lua'/>
+	<Script file='HealthBackdrop.lua'/>
+	<Script file='UnitFrames.lua'/>
+	<Script file='Border.lua'/>
+
+</Ui>

@@ -14,10 +14,6 @@ local unpack = unpack
 local CreateFrame = CreateFrame
 local nameplateIcons, iconFrameCache, nameplateTexts, textFrameCache = {}, {}, {}, {}
 
-local pool = {
-    spark = {}
-}
-
 local function removeStyle(bar)
     local bd = bar.candyBarBackdrop
     bd:Hide()
@@ -38,13 +34,6 @@ local function removeStyle(bar)
             iconBd.oborder:Hide()
         end
     end
-
-    local spark = bar:Get("bigwigs:ayijeui:spark")
-    if spark then
-        spark:Hide()
-        table.insert(pool.spark, spark)
-        bar:Set("bigwigs:ayijeui:spark", nil)
-    end
 end
 
 local function styleBar(bar)
@@ -61,18 +50,6 @@ local function styleBar(bar)
     bd:SetPoint("BOTTOMRIGHT", bar, "BOTTOMRIGHT", 8, -8)
     bd:Show()
         
-
-    local spark = bar.candyBarBar:CreateTexture(nil, "ARTWORK", nil)
-    spark:SetTexture(Engine.Glowline)
-    spark:SetBlendMode("ADD")
-
-    local height = bar:GetHeight()
-    spark:SetSize(10, height)  -- Adjusted size based on the height of the frame
-    spark:SetPoint("CENTER", bar.candyBarBar:GetStatusBarTexture(), "RIGHT", 0, 0)
-    spark.windPoolType = "spark"
-    spark:Show()
-    bar:Set("bigwigs:ayijeui:spark", spark)
-
     local tex = bar:GetIcon()
     if tex then
         local icon = bar.candyBarIconFrame
@@ -124,8 +101,6 @@ end
 function S:BigWigs_QueueTimer()
 	if not E.db.AYIJE.skins.bigwigsqueue then return end
 
-	local spark = true  -- Define spark here
-
 	if _G.BigWigsLoader then
 		_G.BigWigsLoader.RegisterMessage(
 			"ElvUI_AyijeUI",
@@ -144,12 +119,6 @@ function S:BigWigs_QueueTimer()
 					statusBarTexture:SetTexture(Engine.Ayije_light)
 					statusBarTexture:SetVertexColor(1, 0.776, 0.027)
 
-					if spark then
-						frame.spark = frame:CreateTexture(nil, "ARTWORK", nil, 1)
-						frame.spark:SetTexture(Engine.Glowline)
-						frame.spark:SetBlendMode("ADD")
-					end
-
 					frame:SetSize(parent:GetWidth(), 10)
 					frame:SetHeight(18)
 					frame:ClearAllPoints()
@@ -157,15 +126,6 @@ function S:BigWigs_QueueTimer()
 					frame:SetPoint("TOPRIGHT", parent, "BOTTOMRIGHT", -1, -7)
 					frame.text.SetFormattedText = function(self, _, time)
 						self:SetText(format("%d", time))
-
-						if spark then
-							local min, max = frame:GetMinMaxValues()
-							local value = frame:GetValue()
-							local sparkPosition = (value / max) * frame:GetWidth()
-							frame.spark:SetPoint("CENTER", frame, "LEFT", sparkPosition, 0)
-							frame.spark:SetSize(10, frame:GetHeight())
-
-						end
 					end
 					frame.text:ClearAllPoints()
 					frame.text:SetPoint("CENTER", frame, "CENTER", 0, 0)

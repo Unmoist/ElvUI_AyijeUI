@@ -1,10 +1,9 @@
 <Ui xmlns='http://www.blizzard.com/wow/ui/'>
 	<Script file='Manaframe.lua'/>
-	<Script file='Unitframes_Glowline.lua'/>
 	<Script file='FriendsUpdate.lua'/>
 	<Script file='Misc.lua'/>
 	<Script file='PlayerCastBar.lua'/>
-	<Script file='NameplateBorders.lua'/>
+	<!-- <Script file='NameplateBorders.lua'/> -->
 	<Script file='CombatTimer.lua'/>
 	<!-- <Script file='Ayije_CDM.lua'/> -->
 </Ui>
